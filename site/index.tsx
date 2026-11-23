@@ -40,7 +40,7 @@ export default function Site() {
       width={1120}
       lang="en"
       title="Kin care kit"
-      description="One care file, and every paper a family needs to look after a parent: a fridge chart, emergency cards, a care page, a weekly email and a group-chat card, in the parent's own language and English. Built with Hyper Elements."
+      description="One care file, and every paper a family needs to look after a parent: a fridge chart, emergency wallet cards, a care page, a weekly email and a card for the family chat. Built with Hyper Elements."
       theme={brand.theme}
       fonts={brand.fonts}
       style={{ backgroundColor: token("colors.background"), color: token("colors.foreground"), gap: 0 }}
