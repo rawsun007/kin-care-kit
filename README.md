@@ -1,5 +1,7 @@
 # Kin: a care kit for the family looking after a parent
 
+**[See it live](https://rawsun007.github.io/kin-care-kit/)**: every output for every family, with the PDFs, care pages and emails to open.
+
 ![The fridge chart in Hindi, the Arabic chart, the Spanish wallet cards, the weekly email on a phone, and the week card for the family chat](docs/hero.png)
 
 When a parent starts needing care, the family ends up with medicine lists in five places: a photo of the pharmacy bag in a group chat, a note in the GP letter, whatever the daughter remembers. The parent often reads best in the language they grew up with, the carer reads English, and the paramedic at 3am needs the allergy in one second.
@@ -33,6 +35,7 @@ npm run check     # hyper-elements check: every design against its template's fi
 npm run build     # every paper for every family into examples/, and examples/checks.json
 npm run brands    # every template in each of the nine official gallery brands, into docs/brands/
 npm run clients   # the care email in classic Outlook, the Gmail app and Apple Mail, light and dark
+npm run site      # the GitHub Pages site into _site/ (deployed by .github/workflows/pages.yml)
 npx hyper-elements dev templates   # or browse and edit the designs live
 ```
 
@@ -113,7 +116,8 @@ templates/
   _brands/kin.ts          Kin's brand; _brands/gallery/ the nine sample brands
   _care/                  shared fields, the date and supply logic, the languages, pill and icon drawings
   documents/fridge-chart  documents/wallet-card  emails/care-update (+ designs/)  pages/care-page  images/week-card
-scripts/                  build, brands, clients, hero; fonts, screenshots, the PDF fix
+scripts/                  build, brands, clients, hero, site; fonts, screenshots, the PDF fix
+site/index.tsx            the GitHub Pages landing page, itself a Hyper Elements Page
 examples/                 every output for every family, and checks.json
 docs/                     the images in this README
 ```

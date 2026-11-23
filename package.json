@@ -9,7 +9,8 @@
     "brands": "tsx scripts/brands.tsx",
     "clients": "tsx scripts/clients.tsx",
     "typecheck": "tsc --noEmit",
-    "all": "npm run check && npm run build && npm run brands && npm run clients"
+    "all": "npm run check && npm run build && npm run brands && npm run clients",
+    "site": "tsx scripts/site.tsx"
   },
   "keywords": [],
   "author": "",
@@ -39,5 +40,6 @@
       "templates/**",
       "families/**"
     ]
-  }
+  },
+  "homepage": "https://rawsun007.github.io/kin-care-kit/"
 }
