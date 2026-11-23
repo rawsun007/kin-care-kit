@@ -1,0 +1,111 @@
+{
+  "asOf": "2026-11-23",
+  "language": "hi",
+  "person": {
+    "name": "Kamala Sharma",
+    "callName": "Amma",
+    "ownName": "कमला शर्मा",
+    "born": "1946-03-12",
+    "bloodType": "B+",
+    "nhs": "943 476 5919"
+  },
+  "medicines": [
+    {
+      "name": "Metformin",
+      "strength": "500 mg",
+      "form": "tablet",
+      "color": "white",
+      "purpose": { "en": "For sugar", "own": "शुगर के लिए" },
+      "doses": { "morning": 1, "midday": 0, "evening": 1, "bedtime": 0 },
+      "food": "with",
+      "supply": 46
+    },
+    {
+      "name": "Amlodipine",
+      "strength": "10 mg",
+      "form": "tablet",
+      "color": "pink",
+      "purpose": { "en": "For blood pressure", "own": "बीपी के लिए" },
+      "doses": { "morning": 1, "midday": 0, "evening": 0, "bedtime": 0 },
+      "food": "any",
+      "supply": 9,
+      "change": {
+        "on": "2026-11-18",
+        "what": { "en": "Dose went up from 5 mg to 10 mg", "own": "खुराक 5 mg से बढ़कर 10 mg हुई" }
+      }
+    },
+    {
+      "name": "Levothyroxine",
+      "strength": "50 mcg",
+      "form": "tablet",
+      "color": "cream",
+      "purpose": { "en": "For thyroid", "own": "थायरॉइड के लिए" },
+      "doses": { "morning": 1, "midday": 0, "evening": 0, "bedtime": 0 },
+      "food": "before",
+      "note": { "en": "30 minutes before tea", "own": "चाय से 30 मिनट पहले" },
+      "supply": 52
+    },
+    {
+      "name": "Lansoprazole",
+      "strength": "15 mg",
+      "form": "capsule",
+      "color": "purple",
+      "purpose": { "en": "For the stomach", "own": "पेट के लिए" },
+      "doses": { "morning": 1, "midday": 0, "evening": 0, "bedtime": 0 },
+      "food": "before",
+      "supply": 26,
+      "since": "2026-11-16"
+    },
+    {
+      "name": "Adcal-D3",
+      "strength": "1500 mg",
+      "form": "tablet",
+      "color": "orange",
+      "purpose": { "en": "For bones", "own": "हड्डियों के लिए" },
+      "doses": { "morning": 0, "midday": 1, "evening": 0, "bedtime": 0 },
+      "food": "with",
+      "note": { "en": "Chew it, don't swallow whole", "own": "चबाकर खाएँ" },
+      "supply": 38
+    },
+    {
+      "name": "Atorvastatin",
+      "strength": "20 mg",
+      "form": "tablet",
+      "color": "white",
+      "purpose": { "en": "For cholesterol", "own": "कोलेस्ट्रॉल के लिए" },
+      "doses": { "morning": 0, "midday": 0, "evening": 0, "bedtime": 1 },
+      "food": "any",
+      "supply": 61
+    }
+  ],
+  "allergies": [{ "en": "Penicillin", "own": "पेनिसिलिन" }],
+  "conditions": [
+    { "en": "Type 2 diabetes", "own": "शुगर (मधुमेह)" },
+    { "en": "High blood pressure", "own": "हाई बीपी" },
+    { "en": "Underactive thyroid", "own": "थायरॉइड" }
+  ],
+  "contacts": [
+    { "name": "Priya Sharma", "relation": "Daughter", "phone": "+44 7700 900461", "role": "family" },
+    { "name": "Arjun Sharma", "relation": "Son", "phone": "+44 7700 900218", "role": "family" },
+    { "name": "Dr Helen Okafor", "relation": "GP", "phone": "+44 116 496 0732", "role": "doctor" },
+    { "name": "Evington Pharmacy", "relation": "Pharmacy", "phone": "+44 116 496 0415", "role": "pharmacy" }
+  ],
+  "emergencyNumber": "999",
+  "rota": { "mon": "Priya", "tue": "Priya", "wed": "Day centre", "thu": "Arjun", "fri": "Priya", "sat": "Arjun", "sun": "Meera" },
+  "appointments": [
+    {
+      "date": "2026-11-26",
+      "time": "10:30",
+      "what": { "en": "Diabetic eye screening", "own": "आँखों की जाँच (शुगर)" },
+      "where": "Leicester Royal Infirmary, Eye Clinic",
+      "who": "Priya"
+    },
+    {
+      "date": "2026-12-03",
+      "time": "14:15",
+      "what": { "en": "Blood pressure review", "own": "बीपी की जाँच" },
+      "where": "Evington Medical Centre",
+      "who": "Arjun"
+    }
+  ]
+}

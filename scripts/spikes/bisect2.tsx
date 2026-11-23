@@ -1,0 +1,13 @@
+import "../pdf-setup";
+import { readFile, writeFile } from "node:fs/promises";
+import { execSync } from "node:child_process";
+import { renderPdf } from "@hyper-elements/react/pdf";
+import { fridgeChart } from "./fc";
+import { brand } from "../../templates/_brands/kin";
+import { LANGUAGE } from "../../templates/_care/languages";
+import { fontsFor } from "../fonts";
+const base = JSON.parse(await readFile("families/sharma.care.json", "utf8"));
+const c = fridgeChart(brand).check(base); if (!c.valid) throw new Error("invalid");
+const { pdf } = await renderPdf(c.snapshots.default!, { fonts: await fontsFor(brand, LANGUAGE.hi) } as never);
+await writeFile("out/b.pdf", pdf as Uint8Array);
+console.log(process.env.SKIP, execSync("pdftotext -f 1 -l 1 out/b.pdf - | grep -o 'न बदल.*'").toString().trim());
