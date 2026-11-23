@@ -31,3 +31,21 @@ export const closeBrowser = async () => {
   await browser?.close();
   browser = undefined;
 };
+
+/** A Document's print HTML, printed to PDF by Chrome: the browser's own text shaping, for right-to-left scripts. */
+export async function printPdf(html: string, out: string) {
+  browser ??= await chromium.launch({ channel: "chrome" });
+  const page = await browser.newPage();
+  await page.route(`${CDN}/**`, async (route) => {
+    const path = join(ROOT, route.request().url().slice(CDN.length).split("?")[0]!);
+    try {
+      await route.fulfill({ body: await readFile(path) });
+    } catch {
+      await route.fulfill({ status: 404 });
+    }
+  });
+  await page.setContent(html, { waitUntil: "networkidle" });
+  await page.evaluate(() => document.fonts.ready);
+  await page.pdf({ path: out, preferCSSPageSize: true, printBackground: true });
+  await page.close();
+}

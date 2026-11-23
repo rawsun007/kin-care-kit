@@ -1,0 +1,54 @@
+{
+  "asOf": "2026-11-23",
+  "language": "ar",
+  "person": { "name": "Youssef Haddad", "callName": "Baba", "ownName": "يوسف حداد", "born": "1941-07-02", "bloodType": "O+", "nhs": "485 777 3456" },
+  "medicines": [
+    {
+      "name": "Apixaban", "strength": "5 mg", "form": "tablet", "color": "pink",
+      "purpose": { "en": "To thin the blood", "own": "لتسييل الدم" },
+      "doses": { "morning": 1, "midday": 0, "evening": 1, "bedtime": 0 }, "food": "any",
+      "note": { "en": "Never skip a dose", "own": "لا تفوّت أي جرعة" }, "supply": 20
+    },
+    {
+      "name": "Bisoprolol", "strength": "2.5 mg", "form": "tablet", "color": "yellow",
+      "purpose": { "en": "For the heart", "own": "للقلب" },
+      "doses": { "morning": 1, "midday": 0, "evening": 0, "bedtime": 0 }, "food": "any", "supply": 41
+    },
+    {
+      "name": "Furosemide", "strength": "40 mg", "form": "tablet", "color": "white",
+      "purpose": { "en": "Water tablet", "own": "مدرّ للبول" },
+      "doses": { "morning": 1, "midday": 0, "evening": 0, "bedtime": 0 }, "food": "any",
+      "note": { "en": "Before noon, or he's up all night", "own": "قبل الظهر حتى لا يستيقظ ليلًا" }, "supply": 33,
+      "change": { "on": "2026-11-20", "what": { "en": "Up from 20 mg to 40 mg for the swelling", "own": "زادت من 20 إلى 40 ملغ بسبب التورّم" } }
+    },
+    {
+      "name": "Tiotropium", "strength": "2.5 mcg/dose", "form": "inhaler", "color": "blue",
+      "purpose": { "en": "For breathing", "own": "للتنفّس" },
+      "doses": { "morning": 2, "midday": 0, "evening": 0, "bedtime": 0 }, "food": "any", "supply": 50
+    },
+    {
+      "name": "Latanoprost", "strength": "0.005 %", "form": "drops", "color": "green",
+      "purpose": { "en": "For glaucoma", "own": "للمياه الزرقاء في العين" },
+      "doses": { "morning": 0, "midday": 0, "evening": 0, "bedtime": 1 }, "food": "any",
+      "note": { "en": "One drop, each eye", "own": "قطرة في كل عين" }
+    }
+  ],
+  "allergies": [{ "en": "Aspirin", "own": "الأسبرين" }, { "en": "Shellfish", "own": "المحار" }],
+  "conditions": [
+    { "en": "Atrial fibrillation", "own": "رجفان أذيني" },
+    { "en": "Heart failure", "own": "ضعف القلب" },
+    { "en": "COPD", "own": "انسداد رئوي مزمن" }
+  ],
+  "contacts": [
+    { "name": "Rania Haddad", "relation": "Daughter", "phone": "+44 7700 900734", "role": "family" },
+    { "name": "Sami Haddad", "relation": "Son", "phone": "+44 7700 900152", "role": "family" },
+    { "name": "Dr Owen Price", "relation": "GP", "phone": "+44 161 496 0381", "role": "doctor" },
+    { "name": "Rusholme Pharmacy", "relation": "Pharmacy", "phone": "+44 161 496 0590", "role": "pharmacy" }
+  ],
+  "emergencyNumber": "999",
+  "rota": { "mon": "Rania", "tue": "Carer", "wed": "Sami", "thu": "Rania", "fri": "Carer", "sat": "Sami", "sun": "Rania" },
+  "appointments": [
+    { "date": "2026-11-25", "time": "09:15", "what": { "en": "Heart failure nurse", "own": "ممرضة القلب" }, "where": "Manchester Royal Infirmary", "who": "Sami" },
+    { "date": "2026-12-08", "time": "11:00", "what": { "en": "Eye pressure check", "own": "فحص ضغط العين" }, "where": "Manchester Royal Eye Hospital", "who": "Rania" }
+  ]
+}

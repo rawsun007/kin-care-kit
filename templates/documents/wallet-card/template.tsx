@@ -36,7 +36,7 @@ export function walletCard(brand: Brand) {
     const doctor = c.contacts.find((x) => x.role === "doctor");
     const age = ageOn(c.person.born, c.asOf);
     return (
-      <Row stackOnMobile={false} style={{ gap: 0, border: dashed, width: CARD.width * 2 + 4 }}>
+      <Row stackOnMobile={false} dir={l.dir} style={{ gap: 0, border: dashed, width: CARD.width * 2 + 4 }}>
         {/* The front: who, what they can't take, who to call. */}
         <Column style={{ width: CARD.width, height: CARD.height, backgroundColor: "#ffffff", ...font }}>
           <Row stackOnMobile={false} style={{ backgroundColor: token("colors.accent"), color: "#ffffff", padding: [5, 10], gap: 6, alignItems: "center" }}>
@@ -77,7 +77,7 @@ export function walletCard(brand: Brand) {
             <Column style={{ gap: 0 }}>
               <Text style={{ ...font, ...label }}>{en ? "Please call" : `${l.t.emergency} · Please call`}</Text>
               {family.map((x) => (
-                <Text key={x.phone} style={{ ...font, fontSize: 10, lineHeight: 1.25 }}>
+                <Text key={x.phone} dir="ltr" style={{ ...font, fontSize: 10, lineHeight: 1.25, textAlign: l.dir === "rtl" ? "right" : "left" }}>
                   <Span style={{ fontWeight: 700 }}>{x.phone}</Span>
                   {` ${x.name} (${x.relation})`}
                 </Text>
@@ -114,7 +114,7 @@ export function walletCard(brand: Brand) {
           ))}
           <Row stackOnMobile={false} style={{ gap: 6, alignItems: "center" }}>
             {SLOTS.map((s) => (
-              <Row key={s} stackOnMobile={false} style={{ width: 74, gap: 3, alignItems: "center" }}>
+              <Row key={s} stackOnMobile={false} style={{ width: 70, gap: 3, alignItems: "center" }}>
                 <SlotIcon slot={s} size={9} />
                 <Text style={{ ...font, fontSize: 7.5, lineHeight: 1.2, color: SLOT_COLORS[s].ink }}>{l.t.slot[s]}</Text>
               </Row>
@@ -123,7 +123,8 @@ export function walletCard(brand: Brand) {
           {doctor ? (
             <Text style={{ ...font, fontSize: 8.5, lineHeight: 1.25 }}>
               <Span style={{ fontWeight: 700 }}>{both(l.t.doctor, "GP")}</Span>
-              {` ${doctor.name} · ${doctor.phone}`}
+              {" "}
+              <Span>{l.dir === "rtl" ? `${doctor.name} · \u2066${doctor.phone}\u2069` : `${doctor.name} · ${doctor.phone}`}</Span>
             </Text>
           ) : null}
         </Column>

@@ -1,0 +1,572 @@
+{
+  "built": "2026-11-23",
+  "results": [
+    {
+      "family": "haddad",
+      "output": "fridge-chart.pdf",
+      "template": "kin.FridgeChart",
+      "errors": 0,
+      "warnings": 0,
+      "rules": [
+        {
+          "rule": "layout/overflow",
+          "status": "passed"
+        },
+        {
+          "rule": "document/overflow",
+          "status": "passed"
+        },
+        {
+          "rule": "root",
+          "status": "passed"
+        }
+      ]
+    },
+    {
+      "family": "haddad",
+      "output": "wallet-card.pdf",
+      "template": "kin.WalletCard",
+      "errors": 0,
+      "warnings": 0,
+      "rules": [
+        {
+          "rule": "layout/overflow",
+          "status": "passed"
+        },
+        {
+          "rule": "document/overflow",
+          "status": "passed"
+        },
+        {
+          "rule": "root",
+          "status": "passed"
+        }
+      ]
+    },
+    {
+      "family": "haddad",
+      "output": "care-email.html",
+      "template": "kin.CareUpdate",
+      "errors": 0,
+      "warnings": 0,
+      "rules": [
+        {
+          "rule": "contrast",
+          "status": "passed"
+        },
+        {
+          "rule": "text-size",
+          "status": "passed"
+        },
+        {
+          "rule": "lang",
+          "status": "passed"
+        },
+        {
+          "rule": "dir",
+          "status": "passed"
+        },
+        {
+          "rule": "link-text",
+          "status": "passed"
+        },
+        {
+          "rule": "link-empty",
+          "status": "passed"
+        },
+        {
+          "rule": "image-alt",
+          "status": "passed"
+        },
+        {
+          "rule": "alt-text",
+          "status": "passed"
+        },
+        {
+          "rule": "heading-order",
+          "status": "passed"
+        },
+        {
+          "rule": "heading-one",
+          "status": "passed"
+        },
+        {
+          "rule": "preview-text",
+          "status": "passed"
+        },
+        {
+          "rule": "layout/overflow",
+          "status": "passed"
+        },
+        {
+          "rule": "links",
+          "status": "passed"
+        },
+        {
+          "rule": "root",
+          "status": "passed"
+        }
+      ]
+    },
+    {
+      "family": "haddad",
+      "output": "care-page.html",
+      "template": "kin.CarePage",
+      "errors": 0,
+      "warnings": 0,
+      "rules": [
+        {
+          "rule": "contrast",
+          "status": "passed"
+        },
+        {
+          "rule": "text-size",
+          "status": "passed"
+        },
+        {
+          "rule": "lang",
+          "status": "passed"
+        },
+        {
+          "rule": "title",
+          "status": "passed"
+        },
+        {
+          "rule": "link-text",
+          "status": "passed"
+        },
+        {
+          "rule": "link-empty",
+          "status": "passed"
+        },
+        {
+          "rule": "image-alt",
+          "status": "passed"
+        },
+        {
+          "rule": "heading-order",
+          "status": "passed"
+        },
+        {
+          "rule": "heading-one",
+          "status": "passed"
+        },
+        {
+          "rule": "layout/overflow",
+          "status": "passed"
+        },
+        {
+          "rule": "links",
+          "status": "passed"
+        },
+        {
+          "rule": "root",
+          "status": "passed"
+        }
+      ]
+    },
+    {
+      "family": "haddad",
+      "output": "week-card.png",
+      "template": "kin.WeekCard",
+      "errors": 0,
+      "warnings": 0,
+      "rules": [
+        {
+          "rule": "image/overflow",
+          "status": "passed"
+        },
+        {
+          "rule": "image/glyph",
+          "status": "passed"
+        },
+        {
+          "rule": "image/fit",
+          "status": "passed"
+        },
+        {
+          "rule": "root",
+          "status": "passed"
+        }
+      ]
+    },
+    {
+      "family": "morales",
+      "output": "fridge-chart.pdf",
+      "template": "kin.FridgeChart",
+      "errors": 0,
+      "warnings": 0,
+      "rules": [
+        {
+          "rule": "layout/overflow",
+          "status": "passed"
+        },
+        {
+          "rule": "document/overflow",
+          "status": "passed"
+        },
+        {
+          "rule": "root",
+          "status": "passed"
+        }
+      ]
+    },
+    {
+      "family": "morales",
+      "output": "wallet-card.pdf",
+      "template": "kin.WalletCard",
+      "errors": 0,
+      "warnings": 0,
+      "rules": [
+        {
+          "rule": "layout/overflow",
+          "status": "passed"
+        },
+        {
+          "rule": "document/overflow",
+          "status": "passed"
+        },
+        {
+          "rule": "root",
+          "status": "passed"
+        }
+      ]
+    },
+    {
+      "family": "morales",
+      "output": "care-email.html",
+      "template": "kin.CareUpdate",
+      "errors": 0,
+      "warnings": 0,
+      "rules": [
+        {
+          "rule": "contrast",
+          "status": "passed"
+        },
+        {
+          "rule": "text-size",
+          "status": "passed"
+        },
+        {
+          "rule": "lang",
+          "status": "passed"
+        },
+        {
+          "rule": "dir",
+          "status": "passed"
+        },
+        {
+          "rule": "link-text",
+          "status": "passed"
+        },
+        {
+          "rule": "link-empty",
+          "status": "passed"
+        },
+        {
+          "rule": "image-alt",
+          "status": "passed"
+        },
+        {
+          "rule": "alt-text",
+          "status": "passed"
+        },
+        {
+          "rule": "heading-order",
+          "status": "passed"
+        },
+        {
+          "rule": "heading-one",
+          "status": "passed"
+        },
+        {
+          "rule": "preview-text",
+          "status": "passed"
+        },
+        {
+          "rule": "layout/overflow",
+          "status": "passed"
+        },
+        {
+          "rule": "links",
+          "status": "passed"
+        },
+        {
+          "rule": "root",
+          "status": "passed"
+        }
+      ]
+    },
+    {
+      "family": "morales",
+      "output": "care-page.html",
+      "template": "kin.CarePage",
+      "errors": 0,
+      "warnings": 0,
+      "rules": [
+        {
+          "rule": "contrast",
+          "status": "passed"
+        },
+        {
+          "rule": "text-size",
+          "status": "passed"
+        },
+        {
+          "rule": "lang",
+          "status": "passed"
+        },
+        {
+          "rule": "title",
+          "status": "passed"
+        },
+        {
+          "rule": "link-text",
+          "status": "passed"
+        },
+        {
+          "rule": "link-empty",
+          "status": "passed"
+        },
+        {
+          "rule": "image-alt",
+          "status": "passed"
+        },
+        {
+          "rule": "heading-order",
+          "status": "passed"
+        },
+        {
+          "rule": "heading-one",
+          "status": "passed"
+        },
+        {
+          "rule": "layout/overflow",
+          "status": "passed"
+        },
+        {
+          "rule": "links",
+          "status": "passed"
+        },
+        {
+          "rule": "root",
+          "status": "passed"
+        }
+      ]
+    },
+    {
+      "family": "morales",
+      "output": "week-card.png",
+      "template": "kin.WeekCard",
+      "errors": 0,
+      "warnings": 0,
+      "rules": [
+        {
+          "rule": "image/overflow",
+          "status": "passed"
+        },
+        {
+          "rule": "image/glyph",
+          "status": "passed"
+        },
+        {
+          "rule": "image/fit",
+          "status": "passed"
+        },
+        {
+          "rule": "root",
+          "status": "passed"
+        }
+      ]
+    },
+    {
+      "family": "sharma",
+      "output": "fridge-chart.pdf",
+      "template": "kin.FridgeChart",
+      "errors": 0,
+      "warnings": 0,
+      "rules": [
+        {
+          "rule": "layout/overflow",
+          "status": "passed"
+        },
+        {
+          "rule": "document/overflow",
+          "status": "passed"
+        },
+        {
+          "rule": "root",
+          "status": "passed"
+        }
+      ]
+    },
+    {
+      "family": "sharma",
+      "output": "wallet-card.pdf",
+      "template": "kin.WalletCard",
+      "errors": 0,
+      "warnings": 0,
+      "rules": [
+        {
+          "rule": "layout/overflow",
+          "status": "passed"
+        },
+        {
+          "rule": "document/overflow",
+          "status": "passed"
+        },
+        {
+          "rule": "root",
+          "status": "passed"
+        }
+      ]
+    },
+    {
+      "family": "sharma",
+      "output": "care-email.html",
+      "template": "kin.CareUpdate",
+      "errors": 0,
+      "warnings": 0,
+      "rules": [
+        {
+          "rule": "contrast",
+          "status": "passed"
+        },
+        {
+          "rule": "text-size",
+          "status": "passed"
+        },
+        {
+          "rule": "lang",
+          "status": "passed"
+        },
+        {
+          "rule": "dir",
+          "status": "passed"
+        },
+        {
+          "rule": "link-text",
+          "status": "passed"
+        },
+        {
+          "rule": "link-empty",
+          "status": "passed"
+        },
+        {
+          "rule": "image-alt",
+          "status": "passed"
+        },
+        {
+          "rule": "alt-text",
+          "status": "passed"
+        },
+        {
+          "rule": "heading-order",
+          "status": "passed"
+        },
+        {
+          "rule": "heading-one",
+          "status": "passed"
+        },
+        {
+          "rule": "preview-text",
+          "status": "passed"
+        },
+        {
+          "rule": "layout/overflow",
+          "status": "passed"
+        },
+        {
+          "rule": "links",
+          "status": "passed"
+        },
+        {
+          "rule": "root",
+          "status": "passed"
+        }
+      ]
+    },
+    {
+      "family": "sharma",
+      "output": "care-page.html",
+      "template": "kin.CarePage",
+      "errors": 0,
+      "warnings": 0,
+      "rules": [
+        {
+          "rule": "contrast",
+          "status": "passed"
+        },
+        {
+          "rule": "text-size",
+          "status": "passed"
+        },
+        {
+          "rule": "lang",
+          "status": "passed"
+        },
+        {
+          "rule": "title",
+          "status": "passed"
+        },
+        {
+          "rule": "link-text",
+          "status": "passed"
+        },
+        {
+          "rule": "link-empty",
+          "status": "passed"
+        },
+        {
+          "rule": "image-alt",
+          "status": "passed"
+        },
+        {
+          "rule": "heading-order",
+          "status": "passed"
+        },
+        {
+          "rule": "heading-one",
+          "status": "passed"
+        },
+        {
+          "rule": "layout/overflow",
+          "status": "passed"
+        },
+        {
+          "rule": "links",
+          "status": "passed"
+        },
+        {
+          "rule": "root",
+          "status": "passed"
+        }
+      ]
+    },
+    {
+      "family": "sharma",
+      "output": "week-card.png",
+      "template": "kin.WeekCard",
+      "errors": 0,
+      "warnings": 0,
+      "rules": [
+        {
+          "rule": "image/overflow",
+          "status": "passed"
+        },
+        {
+          "rule": "image/glyph",
+          "status": "passed"
+        },
+        {
+          "rule": "image/fit",
+          "status": "passed"
+        },
+        {
+          "rule": "root",
+          "status": "passed"
+        }
+      ]
+    }
+  ]
+}

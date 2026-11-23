@@ -1,0 +1,15 @@
+import { mkdir, readFile, writeFile } from "node:fs/promises";
+import { formatDiagnostics } from "@hyper-elements/react";
+import { renderImage } from "@hyper-elements/react/image";
+import { weekCard } from "../templates/images/week-card/template";
+import { brand } from "../templates/_brands/kin";
+import { LANGUAGE } from "../templates/_care/languages";
+import { fontsFor } from "./fonts";
+const family = process.argv[2] ?? "sharma";
+const care = JSON.parse(await readFile(`families/${family}.care.json`, "utf8"));
+const checked = weekCard(brand).check(care);
+console.log(formatDiagnostics(checked.diagnostics) || "no diagnostics");
+if (!checked.valid) process.exit(1);
+const { image, diagnostics } = await renderImage(checked.snapshots.default!, { fonts: await fontsFor(brand, LANGUAGE[care.language as "hi"]) as never });
+console.log(formatDiagnostics(diagnostics) || "image: no diagnostics");
+await mkdir("out", { recursive: true }); await writeFile(`out/${family}-week.png`, image);

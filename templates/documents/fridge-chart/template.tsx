@@ -43,6 +43,9 @@ export function fridgeChart(brand: Brand) {
   const body = (brand.theme.fonts as Record<string, string>).body!;
   const heading = (brand.theme.fonts as Record<string, string>).heading!;
 
+  /** English inside a right-to-left page: written left to right, still set against the right edge. */
+  const ltr = (l: Language) => (l.dir === "rtl" ? { dir: "ltr" as const } : {});
+  const ltrAlign = (l: Language) => (l.dir === "rtl" ? { textAlign: "right" as const } : {});
   /** Text in the parent's language: their script's font, their direction. */
   const ownStyle = (l: Language) => ({ fontFamily: stackFor(l, body) });
   const flagColors = { new: token("colors.primary"), changed: token("colors.accent") } as const;
@@ -54,7 +57,7 @@ export function fridgeChart(brand: Brand) {
       <Row stackOnMobile={false} style={{ width: NAME, gap: 12, padding: dense ? [7, 14] : [11, 14], alignItems: "center" }}>
         <Pill form={m.form} color={m.color} size={dense ? 38 : 46} />
         <Column style={{ gap: 1 }}>
-          <Text field={`medicines[${i}].name`} style={{ fontFamily: body, fontSize: dense ? 17 : 19, fontWeight: 700, lineHeight: 1.2 }}>
+          <Text field={`medicines[${i}].name`} {...ltr(l)} style={{ ...ltrAlign(l), fontFamily: body, fontSize: dense ? 17 : 19, fontWeight: 700, lineHeight: 1.2 }}>
             {m.name} <Span style={{ fontWeight: 400, color: token("colors.muted") }}>{m.strength}</Span>
           </Text>
           <Text field={`medicines[${i}].purpose`} style={{ ...ownStyle(l), fontSize: dense ? 16 : 17, lineHeight: 1.3 }}>
@@ -221,7 +224,7 @@ export function fridgeChart(brand: Brand) {
             <Row stackOnMobile={false} style={{ gap: 14, alignItems: "center" }}>
               <Column style={{ gap: 0 }}>
                 <Text style={{ ...ownStyle(l), fontSize: 16, fontWeight: 700, lineHeight: 1.3 }}>{l.t.dontStop}</Text>
-                {l.code === "en" ? null : <Text style={{ fontSize: 13, lineHeight: 1.3, color: token("colors.muted") }}>{"Don't stop or change any medicine without asking the doctor."}</Text>}
+                {l.code === "en" ? null : <Text {...ltr(l)} style={{ ...ltrAlign(l), fontSize: 13, lineHeight: 1.3, color: token("colors.muted") }}>{"Don't stop or change any medicine without asking the doctor."}</Text>}
               </Column>
               <Column style={{ flex: "none", width: 380, gap: 0 }}>
                 {[doctor, pharmacy].filter(Boolean).map((x) => (
