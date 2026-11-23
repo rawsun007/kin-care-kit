@@ -22,11 +22,11 @@ export const IN_THEIR_LANGUAGE: Family[] = [
 ];
 
 const TEMPLATES = [
-  { name: "Fridge chart", root: "Document · PDF", text: "The day's medicines by time of day, a drawing of each pill, in the parent's script. Page 2: a week of tick boxes with who's on each day." },
-  { name: "Wallet cards", root: "Document · PDF", text: "Two fold-in-half emergency cards: one in English for a stranger, one in the parent's language. Allergies first." },
-  { name: "Care email", root: "Email", text: "What whoever visited sends the family: refills, dose changes and appointments that need someone, today's readings, a word from them." },
-  { name: "Care page", root: "Page", text: "The one shared page for the brother abroad, the new carer, the locum GP: everything, with refill dates and what's changed." },
-  { name: "Week card", root: "Canvas · PNG", text: "A 1080 × 1350 image for the family chat on a Monday: who's with the parent each day, the next appointment, what to order." },
+  { name: "Fridge chart", root: "Document · PDF", href: "thompson/fridge-chart.pdf", text: "Every medicine by time of day, with a drawing of each pill so nobody mixes up two white tablets. Page 2 is a week of tick boxes, with who's on each day." },
+  { name: "Wallet cards", root: "Document · PDF", href: "thompson/wallet-card.pdf", text: "Fold-in-half emergency cards, one for the wallet and a spare. Allergies first, then conditions, medicines and who to call." },
+  { name: "Care email", root: "Email", href: "thompson/care-email.html", text: "What whoever visited sends the family: refills, dose changes and appointments that need someone, today's readings, and a word from them." },
+  { name: "Care page", root: "Page", href: "thompson/care-page.html", text: "One shared page for the son who lives away, the new carer or the locum GP: every dose, refill dates and what's changed." },
+  { name: "Week card", root: "Canvas · PNG", href: "thompson/week-card.png", text: "An image for the family chat on a Monday: who's with Dad each day, the next appointment, and what to order first." },
 ];
 
 const muted = { color: token("colors.muted") } as const;
@@ -131,15 +131,32 @@ export default function Site() {
 
       <Section style={{ ...band, backgroundColor: token("colors.surface") }}>
         <Heading level={2}>Five templates, one data file</Heading>
-        <Grid columns={3} style={{ gap: 16 }}>
-          {TEMPLATES.map((t) => (
-            <Column key={t.name} style={card}>
-              <Text style={{ fontSize: 14, fontWeight: 700, letterSpacing: 0.6, textTransform: "uppercase", ...muted }}>{t.root}</Text>
-              <Heading level={3}>{t.name}</Heading>
-              <Text style={{ fontSize: 16 }}>{t.text}</Text>
-            </Column>
-          ))}
-        </Grid>
+        <Column style={{ gap: 16 }}>
+        {[0, 3].map((start) => (
+          <Row key={start} style={{ gap: 16, alignItems: "stretch" }}>
+            {start === 0 ? (
+              <Column style={{ ...card, backgroundColor: token("colors.primary"), color: token("colors.primaryForeground"), border: { width: 1, style: "solid", color: token("colors.primary") } }}>
+                <Text style={{ fontSize: 14, fontWeight: 700, letterSpacing: 0.6, textTransform: "uppercase" }}>JSON · the only thing you edit</Text>
+                <Heading level={3} style={{ color: token("colors.primaryForeground") }}>The care file</Heading>
+                <Text style={{ fontSize: 16 }}>Medicines, doses, allergies, contacts, appointments and the week's rota. It's checked before anything is drawn: a dose with no time, or a number a phone can't dial, stops the build.</Text>
+                <Text style={{ fontSize: 16, fontWeight: 700 }}>
+                  <Link href="https://github.com/rawsun007/kin-care-kit/blob/main/families/thompson.care.json" style={{ color: token("colors.primaryForeground") }}>{"Dad's care file"}</Link>
+                </Text>
+              </Column>
+            ) : null}
+            {TEMPLATES.slice(start === 0 ? 0 : 2, start === 0 ? 2 : 5).map((t) => (
+              <Column key={t.name} style={card}>
+                <Text style={{ fontSize: 14, fontWeight: 700, letterSpacing: 0.6, textTransform: "uppercase", ...muted }}>{t.root}</Text>
+                <Heading level={3}>{t.name}</Heading>
+                <Text style={{ fontSize: 16 }}>{t.text}</Text>
+                <Text style={{ fontSize: 16, fontWeight: 700 }}>
+                  <Link href={t.href}>{`Dad's ${t.name.toLowerCase()}`}</Link>
+                </Text>
+              </Column>
+            ))}
+          </Row>
+        ))}
+        </Column>
       </Section>
 
       <Section style={band}>
