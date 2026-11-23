@@ -11,22 +11,22 @@ export const REPO = "https://github.com/rawsun007/kin-care-kit";
 export type Family = { id: string; parent: string; name: string; language: string; script: string; place: string; note: string };
 
 export const FAMILIES: Family[] = [
-  { id: "thompson", parent: "Dad", name: "Peter Thompson", language: "English", script: "English", place: "Bristol", note: "Home after a heart attack: a new blood thinner he mustn't miss, a dose that just went up." },
-  { id: "miller", parent: "Grandma", name: "Dorothy Miller", language: "English", script: "English", place: "Columbus, Ohio", note: "Early Alzheimer's, insulin in units, eye drops at bedtime, 911 not 999." },
+  { id: "thompson", parent: "Dad", name: "Peter Thompson", language: "English", script: "English", place: "Bristol", note: "Just home after a heart attack. There's a new blood thinner he really can't miss, and his blood pressure tablet just went up." },
+  { id: "miller", parent: "Grandma", name: "Dorothy Miller", language: "English", script: "English", place: "Columbus, Ohio", note: "Early Alzheimer's, insulin at 7 every evening and eye drops at bedtime." },
 ];
 
 /** The same kit for a parent who reads best in another language: their script first, English beside it. */
 export const IN_THEIR_LANGUAGE: Family[] = [
-  { id: "sharma", parent: "Amma", name: "Kamala Sharma", language: "Hindi", script: "हिन्दी", place: "Leicester", note: "Six medicines in Devanagari, with English under every line." },
-  { id: "haddad", parent: "Baba", name: "Youssef Haddad", language: "Arabic", script: "العربية", place: "Manchester", note: "Right to left: the whole chart mirrors, English reads normally inside it." },
+  { id: "sharma", parent: "Amma", name: "Kamala Sharma", language: "Hindi", script: "हिन्दी", place: "Leicester", note: "Amma's chart in Hindi, with English under each line." },
+  { id: "haddad", parent: "Baba", name: "Youssef Haddad", language: "Arabic", script: "العربية", place: "Manchester", note: "Baba's in Arabic, so the whole chart flips right to left." },
 ];
 
 const TEMPLATES = [
-  { name: "Fridge chart", root: "Document · PDF", href: "thompson/fridge-chart.pdf", text: "Every medicine by time of day, with a drawing of each pill so nobody mixes up two white tablets. Page 2 is a week of tick boxes, with who's on each day." },
-  { name: "Wallet cards", root: "Document · PDF", href: "thompson/wallet-card.pdf", text: "Fold-in-half emergency cards, one for the wallet and a spare. Allergies first, then conditions, medicines and who to call." },
-  { name: "Care email", root: "Email", href: "thompson/care-email.html", text: "What whoever visited sends the family: refills, dose changes and appointments that need someone, today's readings, and a word from them." },
-  { name: "Care page", root: "Page", href: "thompson/care-page.html", text: "One shared page for the son who lives away, the new carer or the locum GP: every dose, refill dates and what's changed." },
-  { name: "Week card", root: "Canvas · PNG", href: "thompson/week-card.png", text: "An image for the family chat on a Monday: who's with Dad each day, the next appointment, and what to order first." },
+  { name: "Fridge chart", root: "Document · PDF", href: "thompson/fridge-chart.pdf", text: "Every medicine by time of day, with a little drawing of each pill so nobody mixes up two white tablets. Page two is a tick sheet for the week." },
+  { name: "Wallet cards", root: "Document · PDF", href: "thompson/wallet-card.pdf", text: "Fold-in-half emergency cards, one for the wallet and a spare. Allergies come first, then medicines and who to call." },
+  { name: "Care email", root: "Email", href: "thompson/care-email.html", text: "Whoever popped in sends it to everyone else. It says what needs doing this week, today's readings, and a few words of their own." },
+  { name: "Care page", root: "Page", href: "thompson/care-page.html", text: "One page to share with the brother who lives abroad, a new carer or a locum GP. Every dose, when to reorder, and what's changed." },
+  { name: "Week card", root: "Canvas · PNG", href: "thompson/week-card.png", text: "A picture for the family chat on Monday morning. Who's with Dad each day, the next appointment, and what to order first." },
 ];
 
 const muted = { color: token("colors.muted") } as const;
@@ -57,12 +57,12 @@ export default function Site() {
 
       <Section style={{ ...band, padding: [32, 32, 48], mobile: { padding: [16, 16, 32] } }}>
         <Heading level={1} style={{ fontSize: 60, lineHeight: 1.05, mobile: { fontSize: 38 } }}>
-          One care file. Every paper a family needs to look after a parent.
+          Keep a parent's care in one file, not five group chats.
         </Heading>
         <Text style={{ fontSize: 21, lineHeight: 1.5, mobile: { fontSize: 18 } }}>
-          {"A fridge chart, emergency cards, a care page, a weekly email and a card for the family chat, from one file the family keeps up to date. Five "}
+          {"The medicine list usually lives in a photo of the pharmacy bag, a note on the fridge and whatever your sister remembers. Kin turns one small file into a fridge chart, wallet cards, a page to share, a Monday email and a picture for the family chat. It's built with "}
           <Link href="https://hyperelements.dev">Hyper Elements</Link>
-          {" templates, checked before anything is printed."}
+          {"."}
         </Text>
         <Row style={{ gap: 12 }}>
           <Button href="thompson/care-page.html" style={{ flex: "none", fontSize: 18, padding: [14, 22], borderRadius: token("radii.sm") }}>
@@ -76,8 +76,8 @@ export default function Site() {
       </Section>
 
       <Section style={{ ...band, backgroundColor: token("colors.surface") }}>
-        <Heading level={2}>Two families, every output</Heading>
-        <Text style={muted}>Each family is one JSON file. Everything below was built from it by npm run build, and every check passed.</Text>
+        <Heading level={2}>Meet Dad and Grandma</Heading>
+        <Text style={muted}>{"Two made-up families. Everything below is the real output, built from each family's care file, so click around."}</Text>
         <Row style={{ gap: 16, alignItems: "stretch" }}>
           {FAMILIES.map((f) => (
             <Column key={f.id} style={{ ...card, justifyContent: "space-between" }}>
@@ -109,9 +109,9 @@ export default function Site() {
       </Section>
 
       <Section style={band}>
-        <Heading level={2}>Also in the language they read best</Heading>
+        <Heading level={2}>{"If English isn't their first language"}</Heading>
         <Text>
-          Many parents who moved countries read their first language far better than English, more so when they're tired or unwell. Set one field in the care file and the fridge chart and the wallet card print in their script, with English beside every line for the carer and the paramedic. The email, the page and the week card stay in English for the family.
+          Plenty of parents read their first language far better than English, especially when they're tired or poorly. Change one line in the care file and the fridge chart and wallet cards print in their script, with English next to every line for the carer or the paramedic.
         </Text>
         <Row style={{ gap: 16, alignItems: "stretch" }}>
           {IN_THEIR_LANGUAGE.map((f) => (
@@ -134,16 +134,16 @@ export default function Site() {
       </Section>
 
       <Section style={{ ...band, backgroundColor: token("colors.surface") }}>
-        <Heading level={2}>Five templates, one data file</Heading>
+        <Heading level={2}>{"What's in the kit"}</Heading>
         <Column style={{ gap: 16 }}>
         {[0, 3].map((start) => (
           <Row key={start} style={{ gap: 16, alignItems: "stretch" }}>
             {start === 0 ? (
               <Column style={{ ...card, justifyContent: "space-between", backgroundColor: token("colors.primary"), color: token("colors.primaryForeground"), border: { width: 1, style: "solid", color: token("colors.primary") } }}>
                 <Column style={{ gap: 10 }}>
-                  <Text style={{ fontSize: 14, fontWeight: 700, letterSpacing: 0.6, textTransform: "uppercase" }}>JSON · the only thing you edit</Text>
+                  <Text style={{ fontSize: 14, fontWeight: 700, letterSpacing: 0.6, textTransform: "uppercase" }}>The one file you edit</Text>
                   <Heading level={3} style={{ color: token("colors.primaryForeground") }}>The care file</Heading>
-                  <Text style={{ fontSize: 16 }}>Medicines, doses, allergies, contacts, appointments and the week's rota. It's checked before anything is drawn: a dose with no time, or a number a phone can't dial, stops the build.</Text>
+                  <Text style={{ fontSize: 16 }}>{"Medicines, allergies, contacts, appointments and who's on each day. If something's off, like a dose with no time or a phone number that can't be dialled, it tells you before anything gets printed."}</Text>
                 </Column>
                 <Text style={{ fontSize: 16, fontWeight: 700 }}>
                   <Link href="https://github.com/rawsun007/kin-care-kit/blob/main/families/thompson.care.json" style={{ color: token("colors.primaryForeground") }}>{"Dad's care file"}</Link>
@@ -168,9 +168,9 @@ export default function Site() {
       </Section>
 
       <Section style={band}>
-        <Heading level={2}>Drops into the Hyper Elements gallery</Heading>
+        <Heading level={2}>Works with any brand</Heading>
         <Text>
-          Every template is a template() factory over the gallery's own Brand contract. Built from each of the nine sample brands the official gallery tests in, every one checks clean and renders. Safety colours (the emergency number, allergies, dose changes) stay fixed, dark brands get light inks that still pass contrast, and paper is always white.
+          Each template takes a brand, the same way the official Hyper Elements gallery templates do. Here's the fridge chart and the week card in all nine of the gallery's sample brands. A few things never change, though. The emergency box and allergies stay red, and paper stays white, because nobody wants to print a black page for the fridge.
         </Text>
         <Image src="docs/brands-charts.png" alt="The fridge chart in all nine gallery brands" style={{ width: "100%", borderRadius: token("radii.sm") }} />
         <Image src="docs/brands-weeks.png" alt="The week card in all nine gallery brands" style={{ width: "100%", borderRadius: token("radii.sm") }} />
@@ -179,17 +179,17 @@ export default function Site() {
       <Section style={{ ...band, backgroundColor: token("colors.surface") }}>
         <Heading level={2}>Checked before it's printed</Heading>
         <List style={{ fontSize: 17 }}>
-          <ListItem>Accessibility rules are required, not suggested: contrast, text size, language and direction, headings, link text, image text, preview text and the page title. A design that breaks one doesn't build.</ListItem>
-          <ListItem>{"The fridge chart refuses to overflow: \"a medicine cut off a chart is worse than none\"."}</ListItem>
-          <ListItem>A mistake in a care file (a medicine with no dose, a number a phone can't dial, no family contact) stops the build and says what's wrong.</ListItem>
-          <ListItem>The care email, in classic Outlook, the Gmail app and Apple Mail, light and dark: 0 errors.</ListItem>
+          <ListItem>{"If the care file has a mistake, like a medicine with no dose or no family number, the build stops and tells you what's wrong."}</ListItem>
+          <ListItem>{"If the medicines won't fit on one fridge page, the chart squeezes them in. If that still doesn't work, it refuses. Half a medicine list is worse than none."}</ListItem>
+          <ListItem>Contrast, text size, headings, link text and image descriptions are hard rules, not suggestions.</ListItem>
+          <ListItem>The email holds up in Outlook, Gmail and Apple Mail, in light and dark mode.</ListItem>
         </List>
         <Image src="docs/clients.png" alt="The care email in classic Outlook, the Gmail app and Apple Mail, light and dark" style={{ width: "100%", borderRadius: token("radii.sm") }} />
       </Section>
 
       <Section style={{ padding: [32, 32, 48], gap: 8, border: { top: { width: 1, style: "solid", color: token("colors.border") } }, mobile: { padding: [24, 16, 32] } }}>
         <Text style={{ fontSize: 15, ...muted }}>
-          {"Kin is not medical advice: the GP and the pharmacist have the last word on every dose. The families are made up. The Hindi and Arabic are a first draft for a native speaker to check. MIT licensed. "}
+          {"Not medical advice. The GP and the pharmacist always have the final say. The families are made up, and the Hindi and Arabic could use a native speaker's eye. MIT licensed. "}
           <Link href={REPO}>Source on GitHub</Link>
           {"."}
         </Text>
