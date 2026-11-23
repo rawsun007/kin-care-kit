@@ -2,25 +2,31 @@
 
 **[See it live](https://rawsun007.github.io/kin-care-kit/)**: every output for every family, with the PDFs, care pages and emails to open.
 
-![The fridge chart in Hindi, the Arabic chart, the Spanish wallet cards, the weekly email on a phone, and the week card for the family chat](docs/hero.png)
+![Dad's fridge chart, the same chart in Hindi, Grandma's wallet cards, the care email on a phone, and the week card for the family chat](docs/hero.png)
 
-When a parent starts needing care, the family ends up with medicine lists in five places: a photo of the pharmacy bag in a group chat, a note in the GP letter, whatever the daughter remembers. The parent often reads best in the language they grew up with, the carer reads English, and the paramedic at 3am needs the allergy in one second.
+When a parent starts needing care, the family ends up with medicine lists in five places: a photo of the pharmacy bag in a group chat, a note in the GP letter, whatever the daughter remembers. The carer needs today's doses, the son who lives away needs to know what's changed, and the paramedic at 3am needs the allergy in one second.
 
-**Kin** is five [Hyper Elements](https://hyperelements.dev) templates that turn **one care file** (a JSON file of medicines, doses, allergies, contacts, appointments and the week's rota) into everything the family needs, in **the parent's language alongside English**:
+**Kin** is five [Hyper Elements](https://hyperelements.dev) templates that turn **one care file** (a JSON file of medicines, doses, allergies, contacts, appointments and the week's rota) into everything the family needs. It's in English, and **it can also print in the language the parent reads best**, with English beside every line (see below).
 
 | Template | Root | What it's for |
 | --- | --- | --- |
-| [**Fridge chart**](templates/documents/fridge-chart/template.tsx) | `Document` (A4 PDF) | The day's medicines by time of day, with a drawing of each pill, in the parent's script. Page 2 is a week of tick boxes with who's on each day. |
-| [**Wallet cards**](templates/documents/wallet-card/template.tsx) | `Document` (A4 PDF) | Two fold-in-half emergency cards: one in English for a stranger, one in the parent's language. Allergies, conditions, medicines, who to call. |
+| [**Fridge chart**](templates/documents/fridge-chart/template.tsx) | `Document` (A4 PDF) | The day's medicines by time of day, with a drawing of each pill. Page 2 is a week of tick boxes with who's on each day. |
+| [**Wallet cards**](templates/documents/wallet-card/template.tsx) | `Document` (A4 PDF) | Two fold-in-half emergency cards, one for the wallet and a spare. Allergies, conditions, medicines, who to call. |
 | [**Care email**](templates/emails/care-update/template.tsx) | `Email` | What whoever visited today sends the family: what needs someone this week (refills, dose changes, appointments), today's readings, a word from them, the medicines by time of day. |
 | [**Care page**](templates/pages/care-page/template.tsx) | `Page` | The one shared page for the brother abroad, the new carer or the locum GP: everything above, with refill dates and the history of changes. |
 | [**Week card**](templates/images/week-card/template.tsx) | `Canvas` (PNG) | A 1080 × 1350 image for the family group chat on a Monday: who's with the parent each day, the next appointment, what to order first. |
 
-Three example families ship with it, each one built end to end in [`examples/`](examples):
+Two example families ship with it, each one built end to end in [`examples/`](examples):
+
+- **[Thompson](examples/thompson)**: Peter, "Dad", in Bristol, home after a heart attack. He has a new blood thinner he mustn't miss and a dose that just went up.
+- **[Miller](examples/miller)**: Dorothy, "Grandma", in Columbus, Ohio, with early Alzheimer's, insulin in units and eye drops at bedtime.
+
+### Also in the language they read best
+
+Many parents who moved countries read their first language far better than English, more so when they're tired or unwell. Set `"language"` in the care file to `hi`, `ar` or `es`, and the fridge chart and the wallet cards print in the parent's script with English beside every line for the carer and the paramedic. The email, the page and the week card stay in English for the family. Two more examples show it:
 
 - **[Sharma](examples/sharma)**: Kamala, "Amma", in Leicester, who reads **Hindi** (Devanagari).
-- **[Haddad](examples/haddad)**: Youssef, "Baba", in Manchester, who reads **Arabic**, right to left.
-- **[Morales](examples/morales)**: Rosa, "Abuela", in Austin, who reads **Spanish**.
+- **[Haddad](examples/haddad)**: Youssef, "Baba", in Manchester, who reads **Arabic**: the whole chart mirrors right to left.
 
 The care file in every example is made up: names, phone numbers (Ofcom's and NANP's drama ranges), and NHS numbers.
 
@@ -39,7 +45,7 @@ npm run site      # the GitHub Pages site into _site/ (deployed by .github/workf
 npx hyper-elements dev templates   # or browse and edit the designs live
 ```
 
-To make your own family's kit, copy `families/sharma.care.json`, change it, and run `npm run build`. A mistake in the file (a medicine with no dose, a phone number a phone can't dial, no family contact, a dose change dated after the file) stops the build with a message saying what's wrong. **It writes nothing that's wrong.**
+To make your own family's kit, copy `families/thompson.care.json`, change it, and run `npm run build`. A mistake in the file (a medicine with no dose, a phone number a phone can't dial, no family contact, a dose change dated after the file) stops the build with a message saying what's wrong. **It writes nothing that's wrong.**
 
 ## How it uses Hyper Elements
 
@@ -124,7 +130,7 @@ docs/                     the images in this README
 
 ## A note on the translations and the medicine
 
-The Hindi, Arabic and Spanish in the example families and the interface labels are a careful first draft. **Have a native speaker read them** before a family relies on them. Kin is not medical advice: the GP and the pharmacist have the last word on every dose, and every paper says so.
+The Hindi, Arabic and Spanish in the language packs and the Hindi and Arabic example families are a careful first draft. **Have a native speaker read them** before a family relies on them. Kin is not medical advice: the GP and the pharmacist have the last word on every dose, and every paper says so.
 
 ## License
 

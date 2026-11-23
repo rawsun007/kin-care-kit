@@ -8,7 +8,7 @@ import { execSync } from "node:child_process";
 import { renderInEmailClients } from "@hyper-elements/email-clients";
 import { closeBrowser, shoot } from "./shot";
 
-const html = await readFile("examples/sharma/care-email.html", "utf8");
+const html = await readFile("examples/thompson/care-email.html", "utf8");
 await mkdir("docs/clients", { recursive: true });
 const { previews, diagnostics } = await renderInEmailClients(html, { emailClients: ["outlook", "gmail-app", "apple-mail"], dark: true });
 const errors = diagnostics.filter((d) => (d.severity as string) === "error");

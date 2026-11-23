@@ -191,7 +191,7 @@
       ]
     },
     {
-      "family": "morales",
+      "family": "miller",
       "output": "fridge-chart.pdf",
       "template": "kin.FridgeChart",
       "errors": 0,
@@ -212,7 +212,7 @@
       ]
     },
     {
-      "family": "morales",
+      "family": "miller",
       "output": "wallet-card.pdf",
       "template": "kin.WalletCard",
       "errors": 0,
@@ -233,7 +233,7 @@
       ]
     },
     {
-      "family": "morales",
+      "family": "miller",
       "output": "care-email.html",
       "template": "kin.CareUpdate",
       "errors": 0,
@@ -298,7 +298,7 @@
       ]
     },
     {
-      "family": "morales",
+      "family": "miller",
       "output": "care-page.html",
       "template": "kin.CarePage",
       "errors": 0,
@@ -355,7 +355,7 @@
       ]
     },
     {
-      "family": "morales",
+      "family": "miller",
       "output": "week-card.png",
       "template": "kin.WeekCard",
       "errors": 0,
@@ -545,6 +545,195 @@
     },
     {
       "family": "sharma",
+      "output": "week-card.png",
+      "template": "kin.WeekCard",
+      "errors": 0,
+      "warnings": 0,
+      "rules": [
+        {
+          "rule": "image/overflow",
+          "status": "passed"
+        },
+        {
+          "rule": "image/glyph",
+          "status": "passed"
+        },
+        {
+          "rule": "image/fit",
+          "status": "passed"
+        },
+        {
+          "rule": "root",
+          "status": "passed"
+        }
+      ]
+    },
+    {
+      "family": "thompson",
+      "output": "fridge-chart.pdf",
+      "template": "kin.FridgeChart",
+      "errors": 0,
+      "warnings": 0,
+      "rules": [
+        {
+          "rule": "layout/overflow",
+          "status": "passed"
+        },
+        {
+          "rule": "document/overflow",
+          "status": "passed"
+        },
+        {
+          "rule": "root",
+          "status": "passed"
+        }
+      ]
+    },
+    {
+      "family": "thompson",
+      "output": "wallet-card.pdf",
+      "template": "kin.WalletCard",
+      "errors": 0,
+      "warnings": 0,
+      "rules": [
+        {
+          "rule": "layout/overflow",
+          "status": "passed"
+        },
+        {
+          "rule": "document/overflow",
+          "status": "passed"
+        },
+        {
+          "rule": "root",
+          "status": "passed"
+        }
+      ]
+    },
+    {
+      "family": "thompson",
+      "output": "care-email.html",
+      "template": "kin.CareUpdate",
+      "errors": 0,
+      "warnings": 0,
+      "rules": [
+        {
+          "rule": "contrast",
+          "status": "passed"
+        },
+        {
+          "rule": "text-size",
+          "status": "passed"
+        },
+        {
+          "rule": "lang",
+          "status": "passed"
+        },
+        {
+          "rule": "dir",
+          "status": "passed"
+        },
+        {
+          "rule": "link-text",
+          "status": "passed"
+        },
+        {
+          "rule": "link-empty",
+          "status": "passed"
+        },
+        {
+          "rule": "image-alt",
+          "status": "passed"
+        },
+        {
+          "rule": "alt-text",
+          "status": "passed"
+        },
+        {
+          "rule": "heading-order",
+          "status": "passed"
+        },
+        {
+          "rule": "heading-one",
+          "status": "passed"
+        },
+        {
+          "rule": "preview-text",
+          "status": "passed"
+        },
+        {
+          "rule": "layout/overflow",
+          "status": "passed"
+        },
+        {
+          "rule": "links",
+          "status": "passed"
+        },
+        {
+          "rule": "root",
+          "status": "passed"
+        }
+      ]
+    },
+    {
+      "family": "thompson",
+      "output": "care-page.html",
+      "template": "kin.CarePage",
+      "errors": 0,
+      "warnings": 0,
+      "rules": [
+        {
+          "rule": "contrast",
+          "status": "passed"
+        },
+        {
+          "rule": "text-size",
+          "status": "passed"
+        },
+        {
+          "rule": "lang",
+          "status": "passed"
+        },
+        {
+          "rule": "title",
+          "status": "passed"
+        },
+        {
+          "rule": "link-text",
+          "status": "passed"
+        },
+        {
+          "rule": "link-empty",
+          "status": "passed"
+        },
+        {
+          "rule": "image-alt",
+          "status": "passed"
+        },
+        {
+          "rule": "heading-order",
+          "status": "passed"
+        },
+        {
+          "rule": "heading-one",
+          "status": "passed"
+        },
+        {
+          "rule": "layout/overflow",
+          "status": "passed"
+        },
+        {
+          "rule": "links",
+          "status": "passed"
+        },
+        {
+          "rule": "root",
+          "status": "passed"
+        }
+      ]
+    },
+    {
+      "family": "thompson",
       "output": "week-card.png",
       "template": "kin.WeekCard",
       "errors": 0,

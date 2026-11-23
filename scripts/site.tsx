@@ -11,7 +11,7 @@ import { formatDiagnostics, render, validate } from "@hyper-elements/react";
 import { lint } from "@hyper-elements/lint";
 import { carePage } from "../templates/pages/care-page/template";
 import { brand as kin } from "../templates/_brands/kin";
-import Site, { FAMILIES } from "../site/index";
+import Site, { FAMILIES, IN_THEIR_LANGUAGE } from "../site/index";
 
 const repo = process.env.GITHUB_REPOSITORY ?? "rawsun007/kin-care-kit";
 const [owner, name] = repo.split("/") as [string, string];
@@ -35,7 +35,7 @@ await writeFile(`${OUT}/index.html`, html);
 
 // The families, with their care pages pointing at the papers on this site.
 const brand = { ...kin, links: { ...kin.links, domains: [...kin.links.domains, new URL(SITE_URL).hostname] } };
-for (const f of FAMILIES) {
+for (const f of [...FAMILIES, ...IN_THEIR_LANGUAGE]) {
   await cp(`examples/${f.id}`, `${OUT}/${f.id}`, { recursive: true });
   const care = JSON.parse(await readFile(`families/${f.id}.care.json`, "utf8"));
   const page = carePage(brand).check({ ...care, papersUrl: `${SITE_URL}/${f.id}` });

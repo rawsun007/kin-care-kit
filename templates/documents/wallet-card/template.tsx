@@ -170,7 +170,12 @@ export function walletCard(brand: Brand) {
             <Text style={{ ...label }}>For the wallet · in English, for whoever finds it</Text>
             <Card c={c} l={LANGUAGE.en} />
           </Column>
-          {c.language === "en" ? null : (
+          {c.language === "en" ? (
+            <Column style={{ gap: 6, alignItems: "center" }}>
+              <Text style={{ ...label }}>{`A spare · for ${c.person.callName}'s coat pocket, the car, or the carer`}</Text>
+              <Card c={c} l={LANGUAGE.en} />
+            </Column>
+          ) : (
             <Column style={{ gap: 6, alignItems: "center" }}>
               <Text style={{ ...label }}>{`For ${c.person.callName} · in ${l.english} and English`}</Text>
               <Card c={c} l={l} />

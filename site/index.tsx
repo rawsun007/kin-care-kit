@@ -2,7 +2,7 @@
  * The project's own site, for GitHub Pages: a Hyper Elements Page, in the Kin brand, that shows what the kit makes
  * and links to every output for every family. `scripts/site.tsx` renders it into `_site/` with the examples beside it.
  */
-import { Button, Column, Grid, Heading, Image, Link, List, ListItem, Page, Row, Section, Span, Text, token } from "@hyper-elements/react";
+import { Button, Column, Grid, Heading, Image, Link, List, ListItem, Page, Row, Section, Text, token } from "@hyper-elements/react";
 import { brand } from "../templates/_brands/kin";
 import { Mark } from "../templates/_care/parts";
 
@@ -11,9 +11,14 @@ export const REPO = "https://github.com/rawsun007/kin-care-kit";
 export type Family = { id: string; parent: string; name: string; language: string; script: string; place: string; note: string };
 
 export const FAMILIES: Family[] = [
-  { id: "sharma", parent: "Amma", name: "Kamala Sharma", language: "Hindi", script: "हिन्दी", place: "Leicester", note: "Six medicines, one dose just went up, one just started." },
+  { id: "thompson", parent: "Dad", name: "Peter Thompson", language: "English", script: "English", place: "Bristol", note: "Home after a heart attack: a new blood thinner he mustn't miss, a dose that just went up." },
+  { id: "miller", parent: "Grandma", name: "Dorothy Miller", language: "English", script: "English", place: "Columbus, Ohio", note: "Early Alzheimer's, insulin in units, eye drops at bedtime, 911 not 999." },
+];
+
+/** The same kit for a parent who reads best in another language: their script first, English beside it. */
+export const IN_THEIR_LANGUAGE: Family[] = [
+  { id: "sharma", parent: "Amma", name: "Kamala Sharma", language: "Hindi", script: "हिन्दी", place: "Leicester", note: "Six medicines in Devanagari, with English under every line." },
   { id: "haddad", parent: "Baba", name: "Youssef Haddad", language: "Arabic", script: "العربية", place: "Manchester", note: "Right to left: the whole chart mirrors, English stays left to right inside it." },
-  { id: "morales", parent: "Abuela", name: "Rosa Morales", language: "Spanish", script: "Español", place: "Austin", note: "Insulin in units, an eye on memory, 911 not 999." },
 ];
 
 const TEMPLATES = [
@@ -55,32 +60,30 @@ export default function Site() {
           One care file. Every paper a family needs to look after a parent.
         </Heading>
         <Text style={{ fontSize: 21, lineHeight: 1.5, mobile: { fontSize: 18 } }}>
-          {"A fridge chart, emergency cards, a care page, a weekly email and a card for the family chat, in English and in the language the parent reads best: "}
-          <Span style={{ fontWeight: 700 }}>Hindi, Arabic and Spanish</Span>
-          {" so far. Five "}
+          {"A fridge chart, emergency cards, a care page, a weekly email and a card for the family chat, from one file the family keeps up to date. Five "}
           <Link href="https://hyperelements.dev">Hyper Elements</Link>
           {" templates, checked before anything is printed."}
         </Text>
         <Row style={{ gap: 12 }}>
-          <Button href="sharma/care-page.html" style={{ flex: "none", fontSize: 18, padding: [14, 22], borderRadius: token("radii.sm") }}>
-            {"See Amma's care page"}
+          <Button href="thompson/care-page.html" style={{ flex: "none", fontSize: 18, padding: [14, 22], borderRadius: token("radii.sm") }}>
+            {"See Dad's care page"}
           </Button>
           <Button href={REPO} style={{ flex: "none", fontSize: 18, padding: [14, 22], borderRadius: token("radii.sm"), backgroundColor: token("colors.background"), color: token("colors.primary"), border: { width: 2, style: "solid", color: token("colors.primary") } }}>
             Read the code
           </Button>
         </Row>
-        <Image src="docs/hero.png" alt="The fridge chart in Hindi, the Arabic chart, the Spanish wallet cards, the care email on a phone and the week card" style={{ width: "100%", borderRadius: token("radii.md") }} />
+        <Image src="docs/hero.png" alt="Dad's fridge chart, Grandma's wallet cards, the Hindi chart, the care email on a phone and the week card" style={{ width: "100%", borderRadius: token("radii.md") }} />
       </Section>
 
       <Section style={{ ...band, backgroundColor: token("colors.surface") }}>
-        <Heading level={2}>Three families, every output</Heading>
+        <Heading level={2}>Two families, every output</Heading>
         <Text style={muted}>Each family is one JSON file. Everything below was built from it by npm run build, and every check passed.</Text>
-        <Grid columns={3} style={{ gap: 16 }}>
+        <Grid columns={2} style={{ gap: 16 }}>
           {FAMILIES.map((f) => (
             <Column key={f.id} style={{ ...card }}>
               <Image src={`${f.id}/fridge-chart-1.png`} alt={`${f.parent}'s fridge chart, in ${f.language} and English`} style={{ width: "100%", borderRadius: token("radii.sm"), border: { width: 1, style: "solid", color: token("colors.border") } }} />
               <Heading level={3}>{`${f.parent}: ${f.name}`}</Heading>
-              <Text style={{ fontSize: 16, ...muted }}>{`${f.place} · reads ${f.language}. ${f.note}`}</Text>
+              <Text style={{ fontSize: 16, ...muted }}>{`${f.place}. ${f.note}`}</Text>
               <List style={{ fontSize: 17 }}>
                 <ListItem>
                   <Link href={`${f.id}/care-page.html`}>Care page</Link>
@@ -104,6 +107,29 @@ export default function Site() {
       </Section>
 
       <Section style={band}>
+        <Heading level={2}>Also in the language they read best</Heading>
+        <Text>
+          Many parents who moved countries read their first language far better than English, more so when they're tired or unwell. Set one field in the care file and the fridge chart and the wallet card print in their script, with English beside every line for the carer and the paramedic. The email, the page and the week card stay in English for the family.
+        </Text>
+        <Grid columns={2} style={{ gap: 16 }}>
+          {IN_THEIR_LANGUAGE.map((f) => (
+            <Column key={f.id} style={card}>
+              <Image src={`${f.id}/fridge-chart-1.png`} alt={`${f.parent}'s fridge chart, in ${f.language} and English`} style={{ width: "100%", borderRadius: token("radii.sm"), border: { width: 1, style: "solid", color: token("colors.border") } }} />
+              <Heading level={3}>{`${f.language}: ${f.parent}`}</Heading>
+              <Text style={{ fontSize: 16, ...muted }}>{f.note}</Text>
+              <Text style={{ fontSize: 17 }}>
+                <Link href={`${f.id}/fridge-chart.pdf`}>Fridge chart</Link>
+                {" · "}
+                <Link href={`${f.id}/wallet-card.pdf`}>Wallet cards</Link>
+                {" · "}
+                <Link href={`${f.id}/care-page.html`}>Care page</Link>
+              </Text>
+            </Column>
+          ))}
+        </Grid>
+      </Section>
+
+      <Section style={{ ...band, backgroundColor: token("colors.surface") }}>
         <Heading level={2}>Five templates, one data file</Heading>
         <Grid columns={3} style={{ gap: 16 }}>
           {TEMPLATES.map((t) => (
@@ -116,7 +142,7 @@ export default function Site() {
         </Grid>
       </Section>
 
-      <Section style={{ ...band, backgroundColor: token("colors.surface") }}>
+      <Section style={band}>
         <Heading level={2}>Drops into the Hyper Elements gallery</Heading>
         <Text>
           Every template is a template() factory over the gallery's own Brand contract. Built from each of the nine sample brands the official gallery tests in, every one checks clean and renders. Safety colours (the emergency number, allergies, dose changes) stay fixed, dark brands get light inks that still pass contrast, and paper is always white.
@@ -125,7 +151,7 @@ export default function Site() {
         <Image src="docs/brands-weeks.png" alt="The week card in all nine gallery brands" style={{ width: "100%", borderRadius: token("radii.sm") }} />
       </Section>
 
-      <Section style={band}>
+      <Section style={{ ...band, backgroundColor: token("colors.surface") }}>
         <Heading level={2}>Checked before it's printed</Heading>
         <List style={{ fontSize: 17 }}>
           <ListItem>Accessibility rules are required, not suggested: contrast, text size, language and direction, headings, link text, image text, preview text and the page title. A design that breaks one doesn't build.</ListItem>
@@ -138,7 +164,7 @@ export default function Site() {
 
       <Section style={{ padding: [32, 32, 48], gap: 8, border: { top: { width: 1, style: "solid", color: token("colors.border") } }, mobile: { padding: [24, 16, 32] } }}>
         <Text style={{ fontSize: 15, ...muted }}>
-          {"Kin is not medical advice: the GP and the pharmacist have the last word on every dose. The families are made up. Translations are a first draft for a native speaker to check. MIT licensed. "}
+          {"Kin is not medical advice: the GP and the pharmacist have the last word on every dose. The families are made up. The Hindi and Arabic are a first draft for a native speaker to check. MIT licensed. "}
           <Link href={REPO}>Source on GitHub</Link>
           {"."}
         </Text>

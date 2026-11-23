@@ -20,7 +20,7 @@ import { fontsFor } from "./fonts";
 import { closeBrowser, shoot } from "./shot";
 
 const NAMES = ["casa-albero", "ember", "keel", "orbit", "oyen", "pell-ashby", "pith", "quarry", "slow-signals"];
-const care = JSON.parse(await readFile("families/sharma.care.json", "utf8"));
+const care = JSON.parse(await readFile("families/thompson.care.json", "utf8"));
 await mkdir("docs/brands", { recursive: true });
 let failures = 0;
 const ok = (name: string, what: string, checked: { valid: boolean; diagnostics: Parameters<typeof formatDiagnostics>[0] }) => {
@@ -33,13 +33,13 @@ const ok = (name: string, what: string, checked: { valid: boolean; diagnostics: 
 
 for (const name of NAMES) {
   const { brand } = (await import(`../templates/_brands/gallery/${name}.ts`)) as { brand: Brand };
-  const fonts = await fontsFor(brand, LANGUAGE.hi);
+  const fonts = await fontsFor(brand, LANGUAGE.en);
   const site = brand.links.site;
 
-  const email = careUpdate(brand).check({ ...care, from: "Priya", careUrl: `${site}/care/sharma`, log: [{ type: "reading", what: "bp", value: "138/84", when: "Before breakfast" }] });
+  const email = careUpdate(brand).check({ ...care, from: "Sarah", careUrl: `${site}/care/thompson`, log: [{ type: "reading", what: "bp", value: "138/84", when: "Before breakfast" }] });
   if (ok(name, "email", email)) await shoot((await render(email.snapshots.default!)).html, `docs/brands/${name}-email.png`, { width: 640, height: 1100, fullPage: false, scale: 1 });
 
-  const page = carePage(brand).check({ ...care, papersUrl: `${site}/care/sharma/papers` });
+  const page = carePage(brand).check({ ...care, papersUrl: `${site}/care/thompson/papers` });
   if (ok(name, "page", page)) await render(page.snapshots.default!);
 
   for (const [what, make] of [["fridge", fridgeChart], ["card", walletCard]] as const) {

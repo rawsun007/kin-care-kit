@@ -1,0 +1,54 @@
+{
+  "asOf": "2026-11-23",
+  "language": "en",
+  "person": { "name": "Peter Thompson", "callName": "Dad", "born": "1943-05-19", "bloodType": "A-", "nhs": "401 223 7788" },
+  "medicines": [
+    {
+      "name": "Clopidogrel", "strength": "75 mg", "form": "tablet", "color": "pink",
+      "purpose": { "en": "Keeps the stent open" },
+      "doses": { "morning": 1, "midday": 0, "evening": 0, "bedtime": 0 }, "food": "any",
+      "note": { "en": "Never stop without the heart team" }, "supply": 5, "since": "2026-11-10"
+    },
+    {
+      "name": "Ramipril", "strength": "5 mg", "form": "capsule", "color": "red",
+      "purpose": { "en": "For blood pressure and the heart" },
+      "doses": { "morning": 1, "midday": 0, "evening": 0, "bedtime": 0 }, "food": "any", "supply": 27,
+      "change": { "on": "2026-11-17", "what": { "en": "Up from 2.5 mg to 5 mg" } }
+    },
+    {
+      "name": "Metformin", "strength": "500 mg", "form": "tablet", "color": "white",
+      "purpose": { "en": "For sugar" },
+      "doses": { "morning": 1, "midday": 0, "evening": 1, "bedtime": 0 }, "food": "with", "supply": 52
+    },
+    {
+      "name": "Paracetamol", "strength": "500 mg", "form": "tablet", "color": "white",
+      "purpose": { "en": "For the knee" },
+      "doses": { "morning": 0, "midday": 2, "evening": 0, "bedtime": 2 }, "food": "any",
+      "note": { "en": "No more than 8 in a day" }, "supply": 64
+    },
+    {
+      "name": "Tamsulosin", "strength": "400 mcg", "form": "capsule", "color": "orange",
+      "purpose": { "en": "For the prostate" },
+      "doses": { "morning": 0, "midday": 0, "evening": 0, "bedtime": 1 }, "food": "any", "supply": 30
+    },
+    {
+      "name": "Atorvastatin", "strength": "40 mg", "form": "tablet", "color": "white",
+      "purpose": { "en": "For cholesterol" },
+      "doses": { "morning": 0, "midday": 0, "evening": 0, "bedtime": 1 }, "food": "any", "supply": 41
+    }
+  ],
+  "allergies": [{ "en": "Codeine" }],
+  "conditions": [{ "en": "Heart attack, stent fitted" }, { "en": "Type 2 diabetes" }, { "en": "Arthritis in the right knee" }],
+  "contacts": [
+    { "name": "Sarah Thompson", "relation": "Daughter", "phone": "+44 7700 900512", "role": "family" },
+    { "name": "Mark Thompson", "relation": "Son", "phone": "+44 7700 900387", "role": "family" },
+    { "name": "Dr Anita Rao", "relation": "GP", "phone": "+44 117 496 0274", "role": "doctor" },
+    { "name": "Gloucester Road Pharmacy", "relation": "Pharmacy", "phone": "+44 117 496 0819", "role": "pharmacy" }
+  ],
+  "emergencyNumber": "999",
+  "rota": { "mon": "Sarah", "tue": "Mark", "wed": "Sarah", "thu": "Carer", "fri": "Mark", "sat": "Sarah", "sun": "Mark" },
+  "appointments": [
+    { "date": "2026-11-25", "time": "14:00", "what": { "en": "Cardiac rehab, week 2" }, "where": "Bristol Heart Institute", "who": "Sarah" },
+    { "date": "2026-12-01", "time": "09:40", "what": { "en": "Kidney blood test, after the dose change" }, "where": "Gloucester Road Surgery", "who": "Mark" }
+  ]
+}
