@@ -14,15 +14,16 @@ import { brand as kin } from "../../_brands/kin";
 import { careFields } from "../../_care/fields";
 import { addDays, ageOn, assertCare, day, daysBetween, flagOf, lang, mondayOf, own, perDay, slotsOf, supplyOf, weekdayOf, type Care } from "../../_care/compute";
 import { LANGUAGE, SLOTS, WEEKDAYS, fontFacesFor, stackFor } from "../../_care/languages";
-import { Mark, Phone, Pill, SLOT_COLORS, SlotIcon } from "../../_care/parts";
+import { Mark, Phone, Pill, SLOT_COLORS, SlotIcon, SAFETY, alertOn } from "../../_care/parts";
 import sharma from "../../../families/sharma.care.json";
 
 export function carePage(brand: Brand) {
   const body = (brand.theme.fonts as Record<string, string>).body!;
   const colors = brand.theme.colors as Record<string, string>;
+  const alert = alertOn(colors.background!);
   const small = { fontSize: 15, lineHeight: 1.5, color: token("colors.muted") } as const;
   const eyebrow = { fontSize: 14, fontWeight: 700, letterSpacing: 0.6, textTransform: "uppercase", lineHeight: 1.3, color: token("colors.muted") } as const;
-  const card = { backgroundColor: "#ffffff", borderRadius: token("radii.md"), padding: 24, gap: 12, border: { width: 1, style: "solid", color: token("colors.border") }, mobile: { padding: 18 } } as const;
+  const card = { backgroundColor: token("colors.background"), borderRadius: token("radii.md"), padding: 24, gap: 12, border: { width: 1, style: "solid", color: token("colors.border") }, mobile: { padding: 18 } } as const;
   const band = { padding: [40, 32], gap: 20, mobile: { padding: [28, 16] } } as const;
   const rule = { width: 1, style: "solid", color: token("colors.border") } as const;
   const tel = (phone: string) => `tel:${phone.replace(/[^+\d]/g, "")}`;
@@ -72,7 +73,7 @@ export function carePage(brand: Brand) {
           description={`${name}'s medicines, appointments and rota, for the family and whoever helps.`}
           theme={brand.theme}
           fonts={[...brand.fonts, ...fontFacesFor(l)]}
-          style={{ backgroundColor: token("colors.background"), color: token("colors.foreground"), gap: 0 }}
+          style={{ backgroundColor: token("colors.surface"), color: token("colors.foreground"), gap: 0 }}
         >
           {/* Who they are. */}
           <Section style={{ ...band, padding: [28, 32, 40], mobile: { padding: [20, 16, 28] } }}>
@@ -102,7 +103,7 @@ export function carePage(brand: Brand) {
               </Column>
             </Row>
             <Grid columns={3} style={{ gap: 16 }}>
-              <Column style={{ ...card, backgroundColor: token("colors.accent"), color: "#ffffff", border: { width: 1, style: "solid", color: token("colors.accent") }, gap: 4 }}>
+              <Column style={{ ...card, backgroundColor: SAFETY.solid, color: SAFETY.onSolid, border: { width: 1, style: "solid", color: SAFETY.ink }, gap: 4 }}>
                 <Row stackOnMobile={false} style={{ gap: 8, alignItems: "center" }}>
                   <Phone size={20} />
                   <Text style={{ fontSize: 15, fontWeight: 700 }}>In an emergency</Text>
@@ -113,8 +114,8 @@ export function carePage(brand: Brand) {
                   <Link href={tel(family[0]!.phone)} style={{ color: "#ffffff" }}>{`${family[0]!.name.split(" ")[0]}, ${family[0]!.phone}`}</Link>
                 </Text>
               </Column>
-              <Column style={{ ...card, border: { width: 2, style: "solid", color: token("colors.accent") }, gap: 4 }}>
-                <Text style={{ ...eyebrow, color: token("colors.accent") }}>Allergies</Text>
+              <Column style={{ ...card, border: { width: 2, style: "solid", color: alert }, gap: 4 }}>
+                <Text style={{ ...eyebrow, color: alert }}>Allergies</Text>
                 <Text style={{ fontSize: 26, fontWeight: 700, lineHeight: 1.2 }}>{c.allergies.map((a) => a.en).join(", ")}</Text>
                 <Text style={small}>{`Blood type ${c.person.bloodType}${c.person.nhs ? ` · NHS ${c.person.nhs}` : ""}`}</Text>
               </Column>
@@ -131,7 +132,7 @@ export function carePage(brand: Brand) {
           </Section>
 
           {/* A day of medicines. */}
-          <Section style={{ ...band, backgroundColor: "#ffffff", border: { top: rule, bottom: rule } }}>
+          <Section style={{ ...band, backgroundColor: token("colors.background"), border: { top: rule, bottom: rule } }}>
             <Column style={{ gap: 4 }}>
               <Heading level={2}>A day of medicines</Heading>
               <Text style={small}>{`${c.medicines.length} medicines, ${c.medicines.reduce((n, m) => n + perDay(m), 0)} doses a day. ${l.t.dontStop === LANGUAGE.en.t.dontStop ? "" : ""}Don't stop or change any without asking the GP.`}</Text>
@@ -140,7 +141,7 @@ export function carePage(brand: Brand) {
               {SLOTS.map((s) => {
                 const ms = c.medicines.filter((m) => slotsOf(m).includes(s));
                 return (
-                  <Column key={s} style={{ backgroundColor: SLOT_COLORS[s].tint, borderRadius: token("radii.md"), padding: 18, gap: 10 }}>
+                  <Column key={s} style={{ backgroundColor: SLOT_COLORS[s].tint, color: "#1e2a27", borderRadius: token("radii.md"), padding: 18, gap: 10 }}>
                     <Row stackOnMobile={false} style={{ gap: 10, alignItems: "center" }}>
                       <SlotIcon slot={s} size={30} />
                       <Column style={{ gap: 0 }}>
@@ -184,7 +185,7 @@ export function carePage(brand: Brand) {
                         <Text style={{ fontSize: 19, fontWeight: 700, lineHeight: 1.25 }}>
                           {`${m.name} `}
                           <Span style={{ fontWeight: 400, color: token("colors.muted") }}>{m.strength}</Span>
-                          {flag ? <Span style={{ fontSize: 14, color: "#ffffff", backgroundColor: token(flag === "new" ? "colors.primary" : "colors.accent") }}>{flag === "new" ? " New " : " Changed "}</Span> : null}
+                          {flag ? <Span style={{ fontSize: 14, color: flag === "new" ? token("colors.primaryForeground") : SAFETY.onSolid, backgroundColor: flag === "new" ? token("colors.primary") : SAFETY.solid }}>{flag === "new" ? " New " : " Changed "}</Span> : null}
                         </Text>
                         <Text style={{ fontSize: 15, lineHeight: 1.35 }}>
                           {m.purpose.en}
@@ -204,7 +205,7 @@ export function carePage(brand: Brand) {
                     <Column style={{ width: 210, gap: 0, mobile: { width: "100%" } }}>
                       {s ? (
                         <>
-                          <Text style={{ fontSize: 15, fontWeight: 700, lineHeight: 1.35, color: s.urgent ? token("colors.accent") : token("colors.foreground") }}>
+                          <Text style={{ fontSize: 15, fontWeight: 700, lineHeight: 1.35, color: s.urgent ? alert : token("colors.foreground") }}>
                             {daysBetween(c.asOf, s.orderBy) <= 0 ? "Order today" : `Order by ${day(s.orderBy, "en-GB", { weekday: "short", day: "numeric", month: "short" })}`}
                           </Text>
                           <Text style={{ ...small, fontSize: 14 }}>{`${m.supply} left · runs out ${day(s.runsOut, "en-GB", { day: "numeric", month: "short" })}`}</Text>
@@ -227,7 +228,7 @@ export function carePage(brand: Brand) {
                 {changes.length ? (
                   changes.map((x) => (
                     <Row key={x.on + x.text} stackOnMobile={false} style={{ gap: 14, alignItems: "start" }}>
-                      <Text style={{ width: 70, fontSize: 15, fontWeight: 700, color: token("colors.accent") }}>{day(x.on, "en-GB", { day: "numeric", month: "short" })}</Text>
+                      <Text style={{ width: 70, fontSize: 15, fontWeight: 700, color: alert }}>{day(x.on, "en-GB", { day: "numeric", month: "short" })}</Text>
                       <Column style={{ gap: 0 }}>
                         <Text style={{ fontSize: 16, fontWeight: 700, lineHeight: 1.35 }}>{x.text}</Text>
                         <Text style={{ ...small, ...(x.why !== x.text ? ownFont : {}) }}>{x.why}</Text>
@@ -244,7 +245,7 @@ export function carePage(brand: Brand) {
                   c.appointments.map((a) => (
                     <Row key={a.date + a.time} stackOnMobile={false} style={{ gap: 14, alignItems: "start" }}>
                       <Column style={{ width: 56, gap: 0, alignItems: "center", backgroundColor: token("colors.surface"), borderRadius: token("radii.sm"), padding: [6, 0] }}>
-                        <Text style={{ fontSize: 14, fontWeight: 700, lineHeight: 1.2, textAlign: "center", color: token("colors.accent") }}>{day(a.date, "en-GB", { month: "short" }).toUpperCase()}</Text>
+                        <Text style={{ fontSize: 14, fontWeight: 700, lineHeight: 1.2, textAlign: "center", color: alert }}>{day(a.date, "en-GB", { month: "short" }).toUpperCase()}</Text>
                         <Text style={{ fontSize: 24, fontWeight: 700, lineHeight: 1.1, textAlign: "center" }}>{day(a.date, "en-GB", { day: "numeric" })}</Text>
                       </Column>
                       <Column style={{ gap: 0 }}>
@@ -272,7 +273,7 @@ export function carePage(brand: Brand) {
                     padding: [12, 6],
                     borderRadius: token("radii.sm"),
                     alignItems: "center",
-                    backgroundColor: d === today ? token("colors.primary") : "#ffffff",
+                    backgroundColor: d === today ? token("colors.primary") : token("colors.background"),
                     color: d === today ? token("colors.primaryForeground") : token("colors.foreground"),
                   }}
                 >
@@ -300,7 +301,7 @@ export function carePage(brand: Brand) {
               <Button href={`${papers}/fridge-chart.pdf`} style={{ flex: "none", fontSize: 17, padding: [14, 22], borderRadius: token("radii.sm") }}>
                 {`The fridge chart, in ${l.english}`}
               </Button>
-              <Button href={`${papers}/wallet-card.pdf`} style={{ flex: "none", fontSize: 17, padding: [14, 22], borderRadius: token("radii.sm"), backgroundColor: "#ffffff", color: token("colors.primary"), border: { width: 2, style: "solid", color: token("colors.primary") } }}>
+              <Button href={`${papers}/wallet-card.pdf`} style={{ flex: "none", fontSize: 17, padding: [14, 22], borderRadius: token("radii.sm"), backgroundColor: token("colors.background"), color: token("colors.primary"), border: { width: 2, style: "solid", color: token("colors.primary") } }}>
                 The wallet cards
               </Button>
             </Row>

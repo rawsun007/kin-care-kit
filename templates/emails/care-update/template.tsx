@@ -31,7 +31,7 @@ import {
   type Medicine,
 } from "../../_care/compute";
 import { LANGUAGE, SLOTS, WEEKDAYS, fontFacesFor, stackFor } from "../../_care/languages";
-import { SLOT_COLORS } from "../../_care/parts";
+import { SLOT_COLORS, SAFETY, alertOn, slotInkOn } from "../../_care/parts";
 import sharma from "../../../families/sharma.care.json";
 
 const READINGS = {
@@ -73,10 +73,12 @@ function Dot({ color, size = 14 }: { color: string; size?: number }) {
 }
 
 export function careUpdate(brand: Brand) {
+  const background = (brand.theme.colors as Record<string, string>).background!;
+  const alert = alertOn(background);
   const body = (brand.theme.fonts as Record<string, string>).body!;
   const small = { fontSize: 15, lineHeight: 1.45, color: token("colors.muted") } as const;
   const eyebrow = { fontSize: 14, fontWeight: 700, letterSpacing: 0.4, lineHeight: 1.3, color: token("colors.muted") } as const;
-  const card = { backgroundColor: "#ffffff", borderRadius: token("radii.md"), padding: [20, 24], gap: 12, mobile: { padding: [16, 16] } } as const;
+  const card = { backgroundColor: token("colors.background"), borderRadius: token("radii.md"), padding: [20, 24], gap: 12, mobile: { padding: [16, 16] } } as const;
 
   return template({
     id: "kin.CareUpdate",
@@ -156,7 +158,7 @@ export function careUpdate(brand: Brand) {
           previewText={preview}
           theme={brand.theme}
           fonts={[...brand.fonts, ...fontFacesFor(l)]}
-          style={{ backgroundColor: token("colors.background"), color: token("colors.foreground"), gap: 0 }}
+          style={{ backgroundColor: token("colors.surface"), color: token("colors.foreground"), gap: 0 }}
         >
           <Section style={{ padding: [28, 24, 8], gap: 4, mobile: { padding: [20, 16, 4] } }}>
             <Row stackOnMobile={false} style={{ gap: 12, alignItems: "center" }}>
@@ -182,7 +184,7 @@ export function careUpdate(brand: Brand) {
             <Section style={{ padding: [0, 24, 16], gap: 10, mobile: { padding: [0, 16, 12] } }}>
               <Heading level={2} style={{ fontSize: 20 }}>Needs someone</Heading>
               {orders.map(({ m, s }) => (
-                <Row key={`o-${m.name}`} stackOnMobile={false} style={{ ...card, gap: 14, alignItems: "center", border: { left: { width: 5, style: "solid", color: token(s.urgent ? "colors.accent" : "colors.primary") } } }}>
+                <Row key={`o-${m.name}`} stackOnMobile={false} style={{ ...card, gap: 14, alignItems: "center", border: { left: { width: 5, style: "solid", color: s.urgent ? SAFETY.solid : token("colors.primary") } } }}>
                   <Dot color={m.color} size={20} />
                   <Column style={{ gap: 2 }}>
                     <Text style={{ fontWeight: 700 }}>{`Order ${m.name} ${m.strength} by ${day(s.orderBy, "en-GB", { weekday: "long", day: "numeric", month: "long" })}`}</Text>
@@ -191,7 +193,7 @@ export function careUpdate(brand: Brand) {
                 </Row>
               ))}
               {flagged.map(({ m, f }) => (
-                <Row key={`f-${m.name}`} stackOnMobile={false} style={{ ...card, gap: 14, alignItems: "center", border: { left: { width: 5, style: "solid", color: token("colors.accent") } } }}>
+                <Row key={`f-${m.name}`} stackOnMobile={false} style={{ ...card, gap: 14, alignItems: "center", border: { left: { width: 5, style: "solid", color: alert } } }}>
                   <Dot color={m.color} size={20} />
                   <Column style={{ gap: 2 }}>
                     <Text style={{ fontWeight: 700 }}>
@@ -204,7 +206,7 @@ export function careUpdate(brand: Brand) {
               {upcoming.map((a) => (
                 <Row key={`a-${a.date}`} stackOnMobile={false} style={{ ...card, gap: 14, alignItems: "center", border: { left: { width: 5, style: "solid", color: token("colors.primary") } } }}>
                   <Column style={{ width: 52, gap: 0, alignItems: "center", backgroundColor: token("colors.surface"), borderRadius: token("radii.sm"), padding: [6, 0] }}>
-                    <Text style={{ fontSize: 14, fontWeight: 700, lineHeight: 1.2, textAlign: "center", color: token("colors.accent") }}>{day(a.date, "en-GB", { month: "short" }).toUpperCase()}</Text>
+                    <Text style={{ fontSize: 14, fontWeight: 700, lineHeight: 1.2, textAlign: "center", color: alert }}>{day(a.date, "en-GB", { month: "short" }).toUpperCase()}</Text>
                     <Text style={{ fontSize: 22, fontWeight: 700, lineHeight: 1.1, textAlign: "center" }}>{day(a.date, "en-GB", { day: "numeric" })}</Text>
                   </Column>
                   <Column style={{ gap: 2 }}>
@@ -228,7 +230,7 @@ export function careUpdate(brand: Brand) {
                           <Text field={`log[${i}].what`} style={{ fontWeight: 700 }}>{READINGS[b.what].label}</Text>
                           {b.when ? <Text style={small}>{b.when}</Text> : null}
                         </Column>
-                        <Text field={`log[${i}].value`} style={{ width: 180, textAlign: "right", fontSize: 22, fontWeight: 700, color: b.watch ? token("colors.accent") : token("colors.foreground") }}>
+                        <Text field={`log[${i}].value`} style={{ width: 180, textAlign: "right", fontSize: 22, fontWeight: 700, color: b.watch ? alert : token("colors.foreground") }}>
                           {b.value}
                           <Span style={{ fontSize: 15, fontWeight: 400, color: token("colors.muted") }}>{` ${READINGS[b.what].unit}${b.watch ? " · watch" : ""}`}</Span>
                         </Text>
@@ -263,7 +265,7 @@ export function careUpdate(brand: Brand) {
                 <Row key={s} stackOnMobile={false} style={{ gap: 14, padding: [12, 0], alignItems: "start", ...(i < all.length - 1 ? { border: { bottom: { width: 1, style: "solid", color: token("colors.border") } } } : {}) }}>
                   <Row stackOnMobile={false} style={{ width: 132, gap: 8, alignItems: "center", mobile: { width: 104 } }}>
                     <Image src={{ src: `${CDN}/assets/icons/${s}.png`, width: 64, height: 64 }} alt="" style={{ width: 24 }} />
-                    <Text style={{ fontWeight: 700, color: SLOT_COLORS[s].ink }}>{LANGUAGE.en.t.slot[s]}</Text>
+                    <Text style={{ fontWeight: 700, color: slotInkOn(s, background) }}>{LANGUAGE.en.t.slot[s]}</Text>
                   </Row>
                   <Column style={{ gap: 4 }}>
                     {c.medicines
@@ -301,7 +303,7 @@ export function careUpdate(brand: Brand) {
                       padding: [8, 2],
                       borderRadius: token("radii.sm"),
                       alignItems: "center",
-                      backgroundColor: isToday ? token("colors.primary") : "#ffffff",
+                      backgroundColor: isToday ? token("colors.primary") : token("colors.background"),
                       color: isToday ? token("colors.primaryForeground") : token("colors.foreground"),
                     }}
                   >

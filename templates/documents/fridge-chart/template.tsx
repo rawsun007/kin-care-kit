@@ -13,7 +13,7 @@ import { brand as kin } from "../../_brands/kin";
 import { careFields } from "../../_care/fields";
 import { addDays, assertCare, day, flagOf, lang, mondayOf, own, slotsOf, type Care, type Medicine } from "../../_care/compute";
 import { SLOTS, WEEKDAYS, fontFacesFor, stackFor, type Language, type Slot } from "../../_care/languages";
-import { Phone, Pill, SLOT_COLORS, SlotIcon, TickBox } from "../../_care/parts";
+import { Phone, Pill, SLOT_COLORS, SlotIcon, TickBox, SAFETY, paperTheme } from "../../_care/parts";
 import sharma from "../../../families/sharma.care.json";
 
 /** A4 landscape, inside 36px margins. */
@@ -48,7 +48,7 @@ export function fridgeChart(brand: Brand) {
   const ltrAlign = (l: Language) => (l.dir === "rtl" ? { textAlign: "right" as const } : {});
   /** Text in the parent's language: their script's font, their direction. */
   const ownStyle = (l: Language) => ({ fontFamily: stackFor(l, body) });
-  const flagColors = { new: token("colors.primary"), changed: token("colors.accent") } as const;
+  const flagColors = { new: token("colors.primary"), changed: SAFETY.ink } as const;
 
   function MedicineCell({ m, l, asOf, i, dense }: { m: Medicine; l: Language; asOf: string; i: number; dense: boolean }) {
     const flag = flagOf(m, asOf);
@@ -73,7 +73,7 @@ export function fridgeChart(brand: Brand) {
           ) : null}
           {flag ? (
             <Text style={{ ...ownStyle(l), fontSize: 13, lineHeight: 1.3, fontWeight: 700, color: flagColors[flag] }}>
-              <Span style={{ color: "#ffffff", backgroundColor: flagColors[flag] }}>{` ${l.code === "en" ? (flag === "new" ? "New" : "Changed") : `${flag === "new" ? l.t.newMed : l.t.changed} · ${flag === "new" ? "New" : "Changed"}`} `}</Span>
+              <Span style={{ color: flag === "new" ? token("colors.primaryForeground") : "#ffffff", backgroundColor: flagColors[flag] }}>{` ${l.code === "en" ? (flag === "new" ? "New" : "Changed") : `${flag === "new" ? l.t.newMed : l.t.changed} · ${flag === "new" ? "New" : "Changed"}`} `}</Span>
               {` ${what}`}
             </Text>
           ) : null}
@@ -146,7 +146,7 @@ export function fridgeChart(brand: Brand) {
           title={`${c.person.name}: medicines, ${day(c.asOf)}`}
           lang={l.code}
           dir={l.dir}
-          theme={brand.theme}
+          theme={paperTheme(brand.theme)}
           fonts={[...brand.fonts, ...fontFacesFor(l)]}
           style={{ fontSize: 16, lineHeight: 1.4, color: token("colors.foreground"), backgroundColor: token("colors.background") }}
         >
@@ -165,8 +165,8 @@ export function fridgeChart(brand: Brand) {
                   {`${l.code === "en" ? "" : `${l.t.updated} / `}Updated ${day(c.asOf, "en-GB", { day: "numeric", month: "long", year: "numeric" })}`}
                 </Text>
               </Column>
-              <Column style={{ flex: "none", width: 270, border: { width: 2, style: "solid", color: token("colors.accent") }, borderRadius: 14, padding: [8, 14], gap: 0, justifyContent: "center", backgroundColor: "#ffffff" }}>
-                <Text style={{ ...ownStyle(l), fontSize: 14, fontWeight: 700, color: token("colors.accent") }}>
+              <Column style={{ flex: "none", width: 270, border: { width: 2, style: "solid", color: SAFETY.ink }, borderRadius: 14, padding: [8, 14], gap: 0, justifyContent: "center", backgroundColor: "#ffffff" }}>
+                <Text style={{ ...ownStyle(l), fontSize: 14, fontWeight: 700, color: SAFETY.ink }}>
                   {l.code === "en" ? "Allergies" : `${l.t.allergies} · Allergies`}
                 </Text>
                 <Text field="allergies" style={{ ...ownStyle(l), fontSize: 19, fontWeight: 700, lineHeight: 1.25 }}>
@@ -176,7 +176,7 @@ export function fridgeChart(brand: Brand) {
               </Column>
               <Row
                 stackOnMobile={false}
-                style={{ flex: "none", width: 330, backgroundColor: token("colors.accent"), color: "#ffffff", borderRadius: 14, padding: [8, 16], gap: 14, alignItems: "center" }}
+                style={{ flex: "none", width: 330, backgroundColor: SAFETY.solid, color: SAFETY.onSolid, borderRadius: 14, padding: [8, 16], gap: 14, alignItems: "center" }}
               >
                 <Phone size={30} />
                 <Column style={{ gap: 0 }}>

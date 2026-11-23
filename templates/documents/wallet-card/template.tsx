@@ -13,7 +13,7 @@ import { brand as kin } from "../../_brands/kin";
 import { careFields } from "../../_care/fields";
 import { ageOn, assertCare, day, lang, own, slotsOf, type Care } from "../../_care/compute";
 import { LANGUAGE, SLOTS, fontFacesFor, stackFor, type Language } from "../../_care/languages";
-import { Phone, Pill, SLOT_COLORS, SlotIcon } from "../../_care/parts";
+import { Phone, Pill, SLOT_COLORS, SlotIcon, SAFETY, paperTheme } from "../../_care/parts";
 import sharma from "../../../families/sharma.care.json";
 
 /** A bank card, 85.6 by 54 mm, at 96px to the inch, a little larger so 8pt text stays 8pt after trimming. */
@@ -39,7 +39,7 @@ export function walletCard(brand: Brand) {
       <Row stackOnMobile={false} dir={l.dir} style={{ gap: 0, border: dashed, width: CARD.width * 2 + 4 }}>
         {/* The front: who, what they can't take, who to call. */}
         <Column style={{ width: CARD.width, height: CARD.height, backgroundColor: "#ffffff", ...font }}>
-          <Row stackOnMobile={false} style={{ backgroundColor: token("colors.accent"), color: "#ffffff", padding: [5, 10], gap: 6, alignItems: "center" }}>
+          <Row stackOnMobile={false} style={{ backgroundColor: SAFETY.solid, color: SAFETY.onSolid, padding: [5, 10], gap: 6, alignItems: "center" }}>
             <Phone size={12} />
             <Text style={{ ...font, fontSize: 9, fontWeight: 700, lineHeight: 1.2 }}>{en ? "Emergency card" : l.t.card}</Text>
             <Text style={{ ...font, fontSize: 9, fontWeight: 700, lineHeight: 1.2, textAlign: l.dir === "rtl" ? "left" : "right" }}>
@@ -62,8 +62,8 @@ export function walletCard(brand: Brand) {
                   : `${l.t.speaks}: ${parent.own} · Speaks ${parent.english}`}
               </Text>
             ) : null}
-            <Column style={{ gap: 0, border: { left: { width: 3, style: "solid", color: token("colors.accent") } }, padding: [0, 0, 0, 6] }}>
-              <Text style={{ ...font, ...label, color: token("colors.accent") }}>{both(l.t.allergies, "Allergies")}</Text>
+            <Column style={{ gap: 0, border: { left: { width: 3, style: "solid", color: SAFETY.ink } }, padding: [0, 0, 0, 6] }}>
+              <Text style={{ ...font, ...label, color: SAFETY.ink }}>{both(l.t.allergies, "Allergies")}</Text>
               <Text style={{ ...font, fontSize: 11, fontWeight: 700, lineHeight: 1.2 }}>
                 {c.allergies.map((a) => (en ? a.en : `${own(a)} (${a.en})`)).join(", ")}
               </Text>
@@ -155,7 +155,7 @@ export function walletCard(brand: Brand) {
           title={`${c.person.name}: emergency card`}
           lang={l.code}
           dir={l.dir}
-          theme={brand.theme}
+          theme={paperTheme(brand.theme)}
           fonts={[...brand.fonts, ...fontFacesFor(l)]}
           style={{ fontSize: 12, lineHeight: 1.4, color: token("colors.foreground"), alignItems: "center", gap: 28 }}
         >

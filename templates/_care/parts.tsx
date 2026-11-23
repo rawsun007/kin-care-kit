@@ -140,3 +140,35 @@ export function Mark({ size = 40, color, accent }: { size?: number; color: strin
     </Svg>
   );
 }
+
+/**
+ * Safety colours: the emergency number, allergies, a changed dose. Fixed in every brand, as the times of day are: a
+ * brand's accent is often decorative (a teal, a yellow) and an allergy must never be printed in a colour nobody can
+ * read. Each passes WCAG AA: `onSolid` on `solid`, `ink` on `tint` and on white.
+ */
+export const SAFETY = { solid: "#a3321c", onSolid: "#ffffff", ink: "#9a2f1a", tint: "#fbe8e2" } as const;
+
+/** Whether a brand colour is dark: dark brands get the light versions of the safety and time-of-day inks. */
+export function isDark(hex: string) {
+  const n = hex.replace("#", "");
+  const [r, g, b] = [0, 2, 4].map((i) => parseInt(n.slice(i, i + 2), 16) / 255).map((v) => (v <= 0.03928 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4));
+  return 0.2126 * r! + 0.7152 * g! + 0.0722 * b! < 0.18;
+}
+/** The alert ink for text set straight on a brand's background or surface. */
+export const alertOn = (background: string) => (isDark(background) ? "#ffa08a" : SAFETY.ink);
+/** A time of day's ink for text set straight on a brand's background (not on its own tint). */
+const NIGHT_INK = { morning: "#f5bd4f", midday: "#7cc0e6", evening: "#f39a72", bedtime: "#b7b1f5" } as const;
+export const slotInkOn = (slot: keyof typeof SLOT_COLORS, background: string) => (isDark(background) ? NIGHT_INK[slot] : SLOT_COLORS[slot].ink);
+
+/**
+ * Paper is white. A dark brand (a night-time site, a black email) keeps its type, primary and accent on the papers,
+ * but prints dark ink on light paper: toner on a black page is unreadable and costs the family a cartridge.
+ */
+export function paperTheme<T extends { colors: Record<string, unknown> }>(theme: T): T {
+  const c = theme.colors as Record<string, string>;
+  const ink = isDark(c.primary!) ? {} : { primary: "#1c1c1c", primaryForeground: "#ffffff" };
+  if (!isDark(c.background!)) return { ...theme, colors: { ...c, ...ink } };
+  return { ...theme, colors: { ...c, background: "#ffffff", foreground: "#1c1c1c", muted: "#5a5a5a", surface: "#f4f3f0", border: "#d9d6cf", ...ink } };
+}
+/** Text on a brand colour: its own foreground pair if the brand gives one, else whichever of black or white reads. */
+export const inkOn = (fill: string) => (isDark(fill) ? "#ffffff" : "#1c1c1c");

@@ -11,7 +11,7 @@ import { brand as kin } from "../../_brands/kin";
 import { careFields } from "../../_care/fields";
 import { addDays, assertCare, day, daysBetween, lang, mondayOf, supplyOf, weekdayOf, type Care } from "../../_care/compute";
 import { LANGUAGE, WEEKDAYS, fontFacesFor, stackFor } from "../../_care/languages";
-import { Mark, Pill } from "../../_care/parts";
+import { Mark, Pill, SAFETY, alertOn, isDark } from "../../_care/parts";
 import sharma from "../../../families/sharma.care.json";
 
 export function weekCard(brand: Brand) {
@@ -49,16 +49,16 @@ export function weekCard(brand: Brand) {
           lang={l.code}
           fonts={[...brand.fonts, ...fontFacesFor(l)]}
           theme={brand.theme}
-          style={{ backgroundColor: token("colors.primary"), color: "#ffffff", padding: 72, gap: 36, fontFamily: first(body) }}
+          style={{ backgroundColor: token("colors.primary"), color: colors.primaryForeground, padding: 72, gap: 36, fontFamily: first(body) }}
         >
           <Row stackOnMobile={false} style={{ gap: 16, alignItems: "center" }}>
             <Mark size={56} color={colors.background!} accent={colors.accent!} />
-            <Text style={{ fontFamily: first(body), fontSize: 30, fontWeight: 700, color: colors.background }}>
+            <Text style={{ fontFamily: first(body), fontSize: 30, fontWeight: 700, color: colors.primaryForeground }}>
               {`${day(monday, "en-GB", { day: "numeric", month: "short" })} – ${day(addDays(monday, 6), "en-GB", { day: "numeric", month: "short" })}`}
             </Text>
           </Row>
           <Column style={{ gap: 8 }}>
-            <Heading level={1} fit={{ sizes: [96, 84, 72], maxLines: 1 }} style={{ fontFamily: first(heading), lineHeight: 1.05, color: "#ffffff" }}>
+            <Heading level={1} fit={{ sizes: [96, 84, 72], maxLines: 1 }} style={{ fontFamily: first(heading), lineHeight: 1.05, color: colors.primaryForeground }}>
               {`This week with ${c.person.callName}`}
             </Heading>
           </Column>
@@ -70,7 +70,7 @@ export function weekCard(brand: Brand) {
                 style={{ gap: 20, alignItems: "center", padding: [19, 0], ...(k < 6 ? { border: { bottom: { width: 2, style: "solid", color: colors.border } } } : {}) }}
               >
                 <Column style={{ width: 230, gap: 0 }}>
-                  <Text style={{ fontFamily: first(body), fontSize: 30, fontWeight: 700, lineHeight: 1.15, color: d === today ? colors.accent : colors.foreground }}>
+                  <Text style={{ fontFamily: first(body), fontSize: 30, fontWeight: 700, lineHeight: 1.15, color: d === today ? alertOn(colors.background!) : colors.foreground }}>
                     {`${LANGUAGE.en.t.day[d]} ${day(addDays(monday, k), "en-GB", { day: "numeric" })}`}
                   </Text>
                   {l.code !== "en" ? <Text style={{ fontFamily: ownFont, fontSize: 24, lineHeight: 1.2, color: colors.muted }}>{l.t.day[d]}</Text> : null}
@@ -81,14 +81,14 @@ export function weekCard(brand: Brand) {
           </Column>
           <Row stackOnMobile={false} style={{ gap: 24 }}>
             {next ? (
-              <Column style={{ backgroundColor: "rgba(255,255,255,0.12)", borderRadius: 28, padding: [24, 28], gap: 4 }}>
-                <Text style={{ fontFamily: first(body), fontSize: 22, fontWeight: 700, color: colors.background }}>NEXT APPOINTMENT</Text>
+              <Column style={{ backgroundColor: isDark(colors.primary!) ? "rgba(255,255,255,0.12)" : "rgba(0,0,0,0.08)", borderRadius: 28, padding: [24, 28], gap: 4 }}>
+                <Text style={{ fontFamily: first(body), fontSize: 22, fontWeight: 700 }}>NEXT APPOINTMENT</Text>
                 <Text style={{ fontFamily: first(body), fontSize: 30, fontWeight: 700, lineHeight: 1.2 }}>{`${day(next.date, "en-GB", { weekday: "short", day: "numeric", month: "short" })}, ${next.time}`}</Text>
                 <Text style={{ fontFamily: first(body), fontSize: 24, lineHeight: 1.3 }}>{`${next.what.en}${next.who ? ` · ${next.who}` : ""}`}</Text>
               </Column>
             ) : null}
             {order ? (
-              <Row stackOnMobile={false} style={{ backgroundColor: colors.accent, borderRadius: 28, padding: [24, 28], gap: 20, alignItems: "center" }}>
+              <Row stackOnMobile={false} style={{ backgroundColor: SAFETY.solid, color: SAFETY.onSolid, borderRadius: 28, padding: [24, 28], gap: 20, alignItems: "center" }}>
                 <Pill form={order.m.form} color={order.m.color} size={64} />
                 <Column style={{ gap: 4 }}>
                   <Text style={{ fontFamily: first(body), fontSize: 22, fontWeight: 700 }}>ORDER FIRST</Text>
