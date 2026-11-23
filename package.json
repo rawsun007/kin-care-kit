@@ -23,6 +23,7 @@
     "@hyper-elements/cli": "^0.3.3",
     "@types/node": "^26.6.6",
     "@types/react": "^19.3.0",
+    "playwright-core": "^1.65.1",
     "tsx": "^4.23.15",
     "typescript": "^7.0.2"
   },

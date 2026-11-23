@@ -1,0 +1,16 @@
+import { mkdir, writeFile } from "node:fs/promises";
+import { formatDiagnostics, render } from "@hyper-elements/react";
+import { check } from "@hyper-elements/react/template";
+const family = process.argv[2] ?? "sharma";
+const { default: Design } = await import(`../templates/emails/care-update/designs/${family}.tsx`);
+const checked = check(<Design />);
+console.log(formatDiagnostics(checked.diagnostics) || "no diagnostics", JSON.stringify(checked.rules));
+if (!checked.valid) process.exit(1);
+const { html, text } = await render(Object.values(checked.snapshots)[0]!);
+await mkdir("out", { recursive: true });
+await writeFile(`out/${family}-email.html`, html); await writeFile(`out/${family}-email.txt`, text ?? "");
+console.log("ok", html.length);
+const { shoot, closeBrowser } = await import("./shot");
+await shoot(html, `out/${family}-email.png`, { width: 680, scale: 1 });
+await shoot(html, `out/${family}-email-phone.png`, { width: 390, scale: 1 });
+await closeBrowser();
