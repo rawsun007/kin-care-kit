@@ -1,3 +1,4 @@
+import type { ComponentProps } from "react";
 import { Column, List, ListItem, Text } from "@hyper-elements/react";
 import CareUpdate from "../template";
 import care from "../../../../families/haddad.care.json";
@@ -7,7 +8,7 @@ export const meta = { label: "Baba, a Monday with Rania" };
 export default function Haddad() {
   return (
     <CareUpdate
-      {...(care as never as object)}
+      {...(care as unknown as ComponentProps<typeof CareUpdate>)}
       from="Rania"
       careUrl="https://kin.family/haddad"
       log={[

@@ -1,14 +1,19 @@
 {
-  "name": "kin",
+  "name": "kin-care-kit",
   "version": "1.0.0",
-  "description": "",
+  "description": "Medicine charts, emergency cards, a care page, a weekly email and a group-chat card for a family looking after a parent, in the parent’s language. Built with Hyper Elements.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "check": "hyper-elements check templates",
+    "build": "tsx scripts/build.tsx",
+    "brands": "tsx scripts/brands.tsx",
+    "clients": "tsx scripts/clients.tsx",
+    "typecheck": "tsc --noEmit",
+    "all": "npm run check && npm run build && npm run brands && npm run clients"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "@hyper-elements/email-clients": "^0.5.3",
     "@hyper-elements/lint": "^0.1.11",
@@ -27,5 +32,12 @@
     "tsx": "^4.23.15",
     "typescript": "^7.0.2"
   },
-  "type": "module"
+  "type": "module",
+  "private": true,
+  "hyperElements": {
+    "templates": [
+      "templates/**",
+      "families/**"
+    ]
+  }
 }

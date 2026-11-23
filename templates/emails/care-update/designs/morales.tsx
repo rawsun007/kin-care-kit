@@ -1,3 +1,4 @@
+import type { ComponentProps } from "react";
 import { Column, Text } from "@hyper-elements/react";
 import CareUpdate from "../template";
 import care from "../../../../families/morales.care.json";
@@ -7,7 +8,7 @@ export const meta = { label: "Abuela, a Monday with Lucía" };
 export default function Morales() {
   return (
     <CareUpdate
-      {...(care as never as object)}
+      {...(care as unknown as ComponentProps<typeof CareUpdate>)}
       from="Lucía"
       careUrl="https://kin.family/morales"
       log={[

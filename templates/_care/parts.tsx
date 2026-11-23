@@ -164,11 +164,11 @@ export const slotInkOn = (slot: keyof typeof SLOT_COLORS, background: string) =>
  * Paper is white. A dark brand (a night-time site, a black email) keeps its type, primary and accent on the papers,
  * but prints dark ink on light paper: toner on a black page is unreadable and costs the family a cartridge.
  */
-export function paperTheme<T extends { colors: Record<string, unknown> }>(theme: T): T {
+export function paperTheme<T extends { colors?: unknown }>(theme: T): T {
   const c = theme.colors as Record<string, string>;
   const ink = isDark(c.primary!) ? {} : { primary: "#1c1c1c", primaryForeground: "#ffffff" };
-  if (!isDark(c.background!)) return { ...theme, colors: { ...c, ...ink } };
-  return { ...theme, colors: { ...c, background: "#ffffff", foreground: "#1c1c1c", muted: "#5a5a5a", surface: "#f4f3f0", border: "#d9d6cf", ...ink } };
+  if (!isDark(c.background!)) return { ...theme, colors: { ...c, ...ink } } as T;
+  return { ...theme, colors: { ...c, background: "#ffffff", foreground: "#1c1c1c", muted: "#5a5a5a", surface: "#f4f3f0", border: "#d9d6cf", ...ink } } as T;
 }
 /** Text on a brand colour: its own foreground pair if the brand gives one, else whichever of black or white reads. */
 export const inkOn = (fill: string) => (isDark(fill) ? "#ffffff" : "#1c1c1c");
