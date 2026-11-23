@@ -18,7 +18,7 @@ export const FAMILIES: Family[] = [
 /** The same kit for a parent who reads best in another language: their script first, English beside it. */
 export const IN_THEIR_LANGUAGE: Family[] = [
   { id: "sharma", parent: "Amma", name: "Kamala Sharma", language: "Hindi", script: "हिन्दी", place: "Leicester", note: "Six medicines in Devanagari, with English under every line." },
-  { id: "haddad", parent: "Baba", name: "Youssef Haddad", language: "Arabic", script: "العربية", place: "Manchester", note: "Right to left: the whole chart mirrors, English stays left to right inside it." },
+  { id: "haddad", parent: "Baba", name: "Youssef Haddad", language: "Arabic", script: "العربية", place: "Manchester", note: "Right to left: the whole chart mirrors, English reads normally inside it." },
 ];
 
 const TEMPLATES = [
@@ -78,12 +78,14 @@ export default function Site() {
       <Section style={{ ...band, backgroundColor: token("colors.surface") }}>
         <Heading level={2}>Two families, every output</Heading>
         <Text style={muted}>Each family is one JSON file. Everything below was built from it by npm run build, and every check passed.</Text>
-        <Grid columns={2} style={{ gap: 16 }}>
+        <Row style={{ gap: 16, alignItems: "stretch" }}>
           {FAMILIES.map((f) => (
-            <Column key={f.id} style={{ ...card }}>
-              <Image src={`${f.id}/fridge-chart-1.png`} alt={`${f.parent}'s fridge chart, in ${f.language} and English`} style={{ width: "100%", borderRadius: token("radii.sm"), border: { width: 1, style: "solid", color: token("colors.border") } }} />
-              <Heading level={3}>{`${f.parent}: ${f.name}`}</Heading>
-              <Text style={{ fontSize: 16, ...muted }}>{`${f.place}. ${f.note}`}</Text>
+            <Column key={f.id} style={{ ...card, justifyContent: "space-between" }}>
+              <Column style={{ gap: 10 }}>
+                <Image src={`${f.id}/fridge-chart-1.png`} alt={`${f.parent}'s fridge chart`} style={{ width: "100%", borderRadius: token("radii.sm"), border: { width: 1, style: "solid", color: token("colors.border") } }} />
+                <Heading level={3}>{`${f.parent}: ${f.name}`}</Heading>
+                <Text style={{ fontSize: 16, ...muted }}>{`${f.place}. ${f.note}`}</Text>
+              </Column>
               <List style={{ fontSize: 17 }}>
                 <ListItem>
                   <Link href={`${f.id}/care-page.html`}>Care page</Link>
@@ -103,7 +105,7 @@ export default function Site() {
               </List>
             </Column>
           ))}
-        </Grid>
+        </Row>
       </Section>
 
       <Section style={band}>
@@ -111,12 +113,14 @@ export default function Site() {
         <Text>
           Many parents who moved countries read their first language far better than English, more so when they're tired or unwell. Set one field in the care file and the fridge chart and the wallet card print in their script, with English beside every line for the carer and the paramedic. The email, the page and the week card stay in English for the family.
         </Text>
-        <Grid columns={2} style={{ gap: 16 }}>
+        <Row style={{ gap: 16, alignItems: "stretch" }}>
           {IN_THEIR_LANGUAGE.map((f) => (
-            <Column key={f.id} style={card}>
-              <Image src={`${f.id}/fridge-chart-1.png`} alt={`${f.parent}'s fridge chart, in ${f.language} and English`} style={{ width: "100%", borderRadius: token("radii.sm"), border: { width: 1, style: "solid", color: token("colors.border") } }} />
-              <Heading level={3}>{`${f.language}: ${f.parent}`}</Heading>
-              <Text style={{ fontSize: 16, ...muted }}>{f.note}</Text>
+            <Column key={f.id} style={{ ...card, justifyContent: "space-between" }}>
+              <Column style={{ gap: 10 }}>
+                <Image src={`${f.id}/fridge-chart-1.png`} alt={`${f.parent}'s fridge chart, in ${f.language} and English`} style={{ width: "100%", borderRadius: token("radii.sm"), border: { width: 1, style: "solid", color: token("colors.border") } }} />
+                <Heading level={3}>{`${f.language}: ${f.parent}`}</Heading>
+                <Text style={{ fontSize: 16, ...muted }}>{f.note}</Text>
+              </Column>
               <Text style={{ fontSize: 17 }}>
                 <Link href={`${f.id}/fridge-chart.pdf`}>Fridge chart</Link>
                 {" · "}
@@ -126,7 +130,7 @@ export default function Site() {
               </Text>
             </Column>
           ))}
-        </Grid>
+        </Row>
       </Section>
 
       <Section style={{ ...band, backgroundColor: token("colors.surface") }}>
@@ -135,20 +139,24 @@ export default function Site() {
         {[0, 3].map((start) => (
           <Row key={start} style={{ gap: 16, alignItems: "stretch" }}>
             {start === 0 ? (
-              <Column style={{ ...card, backgroundColor: token("colors.primary"), color: token("colors.primaryForeground"), border: { width: 1, style: "solid", color: token("colors.primary") } }}>
-                <Text style={{ fontSize: 14, fontWeight: 700, letterSpacing: 0.6, textTransform: "uppercase" }}>JSON · the only thing you edit</Text>
-                <Heading level={3} style={{ color: token("colors.primaryForeground") }}>The care file</Heading>
-                <Text style={{ fontSize: 16 }}>Medicines, doses, allergies, contacts, appointments and the week's rota. It's checked before anything is drawn: a dose with no time, or a number a phone can't dial, stops the build.</Text>
+              <Column style={{ ...card, justifyContent: "space-between", backgroundColor: token("colors.primary"), color: token("colors.primaryForeground"), border: { width: 1, style: "solid", color: token("colors.primary") } }}>
+                <Column style={{ gap: 10 }}>
+                  <Text style={{ fontSize: 14, fontWeight: 700, letterSpacing: 0.6, textTransform: "uppercase" }}>JSON · the only thing you edit</Text>
+                  <Heading level={3} style={{ color: token("colors.primaryForeground") }}>The care file</Heading>
+                  <Text style={{ fontSize: 16 }}>Medicines, doses, allergies, contacts, appointments and the week's rota. It's checked before anything is drawn: a dose with no time, or a number a phone can't dial, stops the build.</Text>
+                </Column>
                 <Text style={{ fontSize: 16, fontWeight: 700 }}>
                   <Link href="https://github.com/rawsun007/kin-care-kit/blob/main/families/thompson.care.json" style={{ color: token("colors.primaryForeground") }}>{"Dad's care file"}</Link>
                 </Text>
               </Column>
             ) : null}
             {TEMPLATES.slice(start === 0 ? 0 : 2, start === 0 ? 2 : 5).map((t) => (
-              <Column key={t.name} style={card}>
-                <Text style={{ fontSize: 14, fontWeight: 700, letterSpacing: 0.6, textTransform: "uppercase", ...muted }}>{t.root}</Text>
-                <Heading level={3}>{t.name}</Heading>
-                <Text style={{ fontSize: 16 }}>{t.text}</Text>
+              <Column key={t.name} style={{ ...card, justifyContent: "space-between" }}>
+                <Column style={{ gap: 10 }}>
+                  <Text style={{ fontSize: 14, fontWeight: 700, letterSpacing: 0.6, textTransform: "uppercase", ...muted }}>{t.root}</Text>
+                  <Heading level={3}>{t.name}</Heading>
+                  <Text style={{ fontSize: 16 }}>{t.text}</Text>
+                </Column>
                 <Text style={{ fontSize: 16, fontWeight: 700 }}>
                   <Link href={t.href}>{`Dad's ${t.name.toLowerCase()}`}</Link>
                 </Text>

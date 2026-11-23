@@ -102,7 +102,7 @@ export function carePage(brand: Brand) {
                 </Text>
               </Column>
             </Row>
-            <Grid columns={3} style={{ gap: 16 }}>
+            <Row style={{ gap: 16, alignItems: "stretch" }}>
               <Column style={{ ...card, backgroundColor: SAFETY.solid, color: SAFETY.onSolid, border: { width: 1, style: "solid", color: SAFETY.ink }, gap: 4 }}>
                 <Row stackOnMobile={false} style={{ gap: 8, alignItems: "center" }}>
                   <Phone size={20} />
@@ -128,7 +128,7 @@ export function carePage(brand: Brand) {
                   </Text>
                 ))}
               </Column>
-            </Grid>
+            </Row>
           </Section>
 
           {/* A day of medicines. */}
@@ -137,7 +137,7 @@ export function carePage(brand: Brand) {
               <Heading level={2}>A day of medicines</Heading>
               <Text style={small}>{`${c.medicines.length} medicines, ${c.medicines.reduce((n, m) => n + perDay(m), 0)} doses a day. ${l.t.dontStop === LANGUAGE.en.t.dontStop ? "" : ""}Don't stop or change any without asking the GP.`}</Text>
             </Column>
-            <Grid columns={4} style={{ gap: 12 }}>
+            <Row style={{ gap: 12, alignItems: "stretch" }}>
               {SLOTS.map((s) => {
                 const ms = c.medicines.filter((m) => slotsOf(m).includes(s));
                 return (
@@ -167,7 +167,7 @@ export function carePage(brand: Brand) {
                   </Column>
                 );
               })}
-            </Grid>
+            </Row>
           </Section>
 
           {/* Every medicine. */}
@@ -185,7 +185,8 @@ export function carePage(brand: Brand) {
                         <Text style={{ fontSize: 19, fontWeight: 700, lineHeight: 1.25 }}>
                           {`${m.name} `}
                           <Span style={{ fontWeight: 400, color: token("colors.muted") }}>{m.strength}</Span>
-                          {flag ? <Span style={{ fontSize: 14, color: flag === "new" ? token("colors.primaryForeground") : SAFETY.onSolid, backgroundColor: flag === "new" ? token("colors.primary") : SAFETY.solid }}>{flag === "new" ? " New " : " Changed "}</Span> : null}
+                          {flag ? " " : null}
+                          {flag ? <Span style={{ fontSize: 14, fontWeight: 700, color: flag === "new" ? token("colors.primaryForeground") : SAFETY.onSolid, backgroundColor: flag === "new" ? token("colors.primary") : SAFETY.solid }}>{flag === "new" ? "\u00a0New\u00a0" : "\u00a0Changed\u00a0"}</Span> : null}
                         </Text>
                         <Text style={{ fontSize: 15, lineHeight: 1.35 }}>
                           {m.purpose.en}
