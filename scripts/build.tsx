@@ -3,6 +3,9 @@
  * `examples/checks.json`. Each design is checked by its template first (its fields, its rules, the accessibility
  * rules it requires); one that fails stops the build, and nothing of it is written.
  *
+ * Chrome (screenshots, right-to-left PDFs) and Poppler (PNG previews of the PDFs) are optional: without them the
+ * build makes everything else and says what it skipped.
+ *
  * npx tsx scripts/build.tsx
  */
 import "./pdf-setup";
@@ -19,7 +22,7 @@ import { weekCard } from "../templates/images/week-card/template";
 import { brand as kin } from "../templates/_brands/kin";
 import { LANGUAGE, type LanguageCode } from "../templates/_care/languages";
 import { fontsFor } from "./fonts";
-import { closeBrowser, printPdf, shoot } from "./shot";
+import { closeBrowser, hasChrome, printPdf, shoot } from "./shot";
 
 type Result = { family: string; output: string; template: string; errors: number; warnings: number; rules: { rule: string; status: string }[] };
 const results: Result[] = [];
@@ -43,6 +46,22 @@ function fail(what: string, diagnostics: Diagnostic[]): never {
   process.exit(1);
 }
 
+const chrome = await hasChrome();
+const poppler = (() => {
+  try {
+    execSync("pdftoppm -v", { stdio: "ignore" });
+    return true;
+  } catch {
+    return false;
+  }
+})();
+const skipped = new Set<string>();
+if (!chrome) skipped.add("screenshots and right-to-left PDFs (install Google Chrome)");
+if (!poppler) skipped.add("PNG previews of the PDFs (install Poppler: brew install poppler, apt install poppler-utils)");
+const snap = async (html: string, out: string, opts: Parameters<typeof shoot>[2]) => {
+  if (chrome) await shoot(html, out, opts);
+};
+
 const families = (await readdir("families")).filter((f) => f.endsWith(".care.json")).map((f) => f.replace(".care.json", ""));
 await rm("examples", { recursive: true, force: true });
 
@@ -59,6 +78,10 @@ for (const family of families) {
     const checked = make(kin).check(care);
     if (!checked.valid) fail(`${family}/${name}`, checked.diagnostics);
     const out = `${dir}/${name}.pdf`;
+    if (l.dir === "rtl" && !chrome) {
+      record(family, `${name}.pdf (skipped)`, checked);
+      continue;
+    }
     if (l.dir === "rtl") {
       const { html, diagnostics } = await render(checked.snapshots.default!);
       await printPdf(html, out);
@@ -68,7 +91,7 @@ for (const family of families) {
       await writeFile(out, pdf as Uint8Array);
       record(family, `${name}.pdf`, checked, diagnostics);
     }
-    execSync(`pdftoppm -png -r 110 ${out} ${dir}/${name}`);
+    if (poppler) execSync(`pdftoppm -png -r 110 ${out} ${dir}/${name}`);
   }
 
   // The email: a design file, with today's log and a word from whoever was there.
@@ -79,8 +102,8 @@ for (const family of families) {
     const { html, text, diagnostics } = await render(Object.values(checked.snapshots)[0]!);
     await writeFile(`${dir}/care-email.html`, html);
     await writeFile(`${dir}/care-email.txt`, text ?? "");
-    await shoot(html, `${dir}/care-email.png`, { width: 680, scale: 1 });
-    await shoot(html, `${dir}/care-email-phone.png`, { width: 390, scale: 2 });
+    await snap(html, `${dir}/care-email.png`, { width: 680, scale: 1 });
+    await snap(html, `${dir}/care-email-phone.png`, { width: 390, scale: 2 });
     record(family, "care-email.html", checked, diagnostics);
   }
 
@@ -90,8 +113,8 @@ for (const family of families) {
     if (!checked.valid) fail(`${family}/care-page`, checked.diagnostics);
     const { html, diagnostics } = await render(checked.snapshots.default!);
     await writeFile(`${dir}/care-page.html`, html);
-    await shoot(html, `${dir}/care-page.png`, { width: 1200, scale: 1 });
-    await shoot(html, `${dir}/care-page-phone.png`, { width: 390, scale: 2 });
+    await snap(html, `${dir}/care-page.png`, { width: 1200, scale: 1 });
+    await snap(html, `${dir}/care-page-phone.png`, { width: 390, scale: 2 });
     record(family, "care-page.html", checked, diagnostics);
   }
 
@@ -111,4 +134,5 @@ await writeFile("examples/checks.json", `${JSON.stringify({ built: new Date().to
 const errors = results.reduce((n, r) => n + r.errors, 0);
 const warnings = results.reduce((n, r) => n + r.warnings, 0);
 const rules = results.reduce((n, r) => n + r.rules.filter((x) => x.status === "passed").length, 0);
+for (const what of skipped) console.log(`Skipped ${what}.`);
 console.log(`\n${results.length} outputs for ${families.length} families: ${errors} errors, ${warnings} warnings, ${rules} required rules passed.`);

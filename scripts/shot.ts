@@ -27,6 +27,16 @@ export async function shoot(html: string, out: string, { width = 680, height = 9
   await page.close();
 }
 
+/** Whether Google Chrome is installed: screenshots and the right-to-left PDFs need it, nothing else does. */
+export async function hasChrome() {
+  try {
+    browser ??= await chromium.launch({ channel: "chrome" });
+    return true;
+  } catch {
+    return false;
+  }
+}
+
 export const closeBrowser = async () => {
   await browser?.close();
   browser = undefined;

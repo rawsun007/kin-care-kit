@@ -2,6 +2,17 @@
 
 **[See it live](https://rawsun007.github.io/kin-care-kit/)**: every output for every family, with the PDFs, care pages and emails to open.
 
+> **Try it in a minute.** Node 20+ is all you need.
+>
+> ```bash
+> git clone https://github.com/rawsun007/kin-care-kit && cd kin-care-kit
+> npm install
+> npx hyper-elements dev templates   # every design, live in your browser
+> npm run check                      # every design against its template's rules
+> ```
+>
+> Or skip the install and open the [live site](https://rawsun007.github.io/kin-care-kit/).
+
 ![Dad's fridge chart, the same chart in Hindi, Grandma's wallet cards, the care email on a phone, and the week card for the family chat](docs/hero.png)
 
 When a parent starts needing care, the family ends up with medicine lists in five places: a photo of the pharmacy bag in a group chat, a note in the GP letter, whatever the daughter remembers. The carer needs today's doses, the son who lives away needs to know what's changed, and the paramedic at 3am needs the allergy in one second.
@@ -32,7 +43,7 @@ The care file in every example is made up: names, phone numbers (Ofcom's and NAN
 
 ## Run it
 
-Requires Node 20+, Google Chrome (for screenshots and the right-to-left PDFs) and [Poppler](https://poppler.freedesktop.org) (`brew install poppler`) for the PDF previews.
+Needs Node 20+. Google Chrome (for screenshots and the right-to-left PDFs) and [Poppler](https://poppler.freedesktop.org) (`brew install poppler`, for PNG previews of the PDFs) are optional: without them, `npm run build` makes everything else and says what it skipped.
 
 ```bash
 git clone https://github.com/rawsun007/kin-care-kit && cd kin-care-kit
